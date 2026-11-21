@@ -6,7 +6,6 @@
 <meta name="color-scheme" content="light dark" />
 <meta name="impact-site-verification" content="3b448438-0675-4625-a1ec-46f620850297">
 <!-- Impact-Site-Verification: 3b448438-0675-4625-a1ec-46f620850297 -->
-<link rel="icon" href="data:," />
 <title>Offline AI Stack — Visual Roadmap</title>
 <style>
   :root{
@@ -245,6 +244,19 @@
   .phase li{margin-bottom:6px}
   .phase .exit{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line-strong);font-size:13.5px;color:var(--ink)}
   .phase .exit strong{font-family:system-ui,sans-serif;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--amber);display:block}
+  /* Phase "Do it — step by step" expanders — built on the .custom-adjust
+     details/summary styling, adapted to sit inside a phase card: full-width,
+     a 44px tap target, left-aligned steps, and code blocks that scroll
+     sideways inside the card instead of overflowing it. */
+  .phase details.phase-steps{margin-top:14px;text-align:left;width:100%;align-self:stretch}
+  .phase details.phase-steps>summary{font-family:system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--amber);cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center;padding:9px 10px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface2);list-style-position:inside}
+  .phase details.phase-steps>summary:hover{color:var(--ink);border-color:var(--amber)}
+  .phase details.phase-steps>summary:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .phase details.phase-steps>ol{margin:12px 0 2px;padding-left:20px;width:auto;max-width:100%}
+  .phase details.phase-steps li{margin-bottom:10px}
+  .phase details.phase-steps li:last-child{margin-bottom:2px}
+  .phase details.phase-steps pre{margin:8px 0 6px;background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:10px 12px;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+  .phase details.phase-steps pre code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;background:transparent;border:none;border-radius:0;padding:0;color:inherit;white-space:pre}
 
   /* HERMES */
   .beforeafter{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
@@ -1343,6 +1355,31 @@
     .ody-link{width:100%;justify-content:center}
   }
 </style>
+<!-- PWA -->
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="theme-color" content="#faf5ec" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#14110c" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-title" content="Offline AI" />
+<style>
+  /* ---- PWA: offline badge + needs-internet states ---- */
+  .disclosure-bar .bar-right{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;justify-content:flex-end;margin-left:auto}
+  .pwa-badge{display:inline-flex;align-items:center;gap:6px;font-family:system-ui,sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.02em;border-radius:999px;padding:3px 10px;border:1px solid var(--line-strong);color:var(--muted);background:var(--surface);white-space:nowrap}
+  .pwa-badge[data-state="ready"]{color:var(--teal);background:var(--teal-soft);border-color:var(--teal)}
+  .pwa-badge[data-state="offline"]{color:var(--rust);background:var(--rust-soft);border-color:var(--rust)}
+  .pwa-update{font:inherit;font-weight:700;color:var(--amber);background:none;border:1.5px solid var(--amber);border-radius:999px;padding:4px 12px;min-height:44px;cursor:pointer}
+  .pwa-update:hover{background:var(--amber);color:#fff}
+  /* Off-site links (stores, makers, GitHub) need the internet */
+  body.is-offline a[href^="http"]{opacity:.55;cursor:not-allowed}
+  body.is-offline .aff-note::after{content:" · needs internet";color:var(--rust)}
+  .net-toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:200;max-width:min(92vw,440px);background:var(--ink);color:var(--bg);border-radius:14px;padding:12px 16px;font-size:14px;line-height:1.45;box-shadow:var(--shadow)}
+  .net-toast strong{color:var(--amber-bright)}
+</style>
 </head>
 <body>
 
@@ -1530,6 +1567,7 @@
         </video>
         <figcaption>Your personal agent, on your desk — no cloud, no connection, power you control</figcaption>
       </figure>
+        <div style="text-align:center;margin-top:10px"><span class="pwa-badge" id="pwaBadge" role="status" aria-live="polite" hidden></span></div>
       <div class="intake-teaser" id="intakeTeaser">
         <button type="button" class="intake-teaser-btn" id="intakeTeaserBtn">Start Here →</button>
       </div>
@@ -2022,9 +2060,9 @@
 <section id="phases"><div class="wrap">
   <div class="sec-head"><div class="page-head-row"><span class="tag">Build plan</span><button type="button" class="read-aloud-btn" aria-label="Read this page aloud" title="Read this page aloud"><svg class="speaker-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10v4h3l5 4V6l-5 4H4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><svg class="stop-icon" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button><span class="visually-hidden read-aloud-status" role="status" aria-live="polite"></span></div><h2>Build plan — phases, helpers &amp; decisions</h2><p>The finish in one place: three build phases, the before-you-unplug checklist, your helper agents, and the open decisions. Stop after any phase and you still own a working private AI.</p></div>
   <div class="phases">
-    <div class="phase"><span class="pnum">1</span><h3>Prove it on what you have</h3><ol><li><strong>Step 0 — Check what you have:</strong> note your laptop's power, graphics memory, regular memory, and free space (marked TBD until you do this).</li><li>Install Ollama + Open WebUI, set to this machine only.</li><li>Download a small and a mid-size brain in one online window.</li><li>First airplane-mode test.</li></ol><div class="exit"><strong>Exit test</strong>Private chat + dictation working offline on the current machine, $0 spent.</div></div>
-    <div class="phase"><span class="pnum">2</span><h3>Buy the tier, build it out</h3><ol><li>Make the open decisions below; buy once, at your level.</li><li>One big download window for the full brain library (budget the time — the biggest brain is ~40 GB).</li><li>Voice in and out, file search over your approved folders.</li><li>The Privacy and Security checklist, top to bottom.</li><li>A battery/generator test at real working load.</li></ol><div class="exit"><strong>Exit test</strong>The full stack passes airplane mode on the new machine, at the speed its level promised.</div></div>
-    <div class="phase"><span class="pnum">3</span><h3>Connect your helper agents</h3><ol><li>Point any helper agents you run at the home base on this machine.</li><li>Remove the cloud keys from their settings.</li><li>Give each job its brain: small and fast for background loops, big for deep work.</li><li>Run a normal day with Wi-Fi off, and honestly compare quality with the cloud setup.</li></ol><div class="exit"><strong>Exit test</strong>A full working day from your agents with the network down — and you'd choose to do it again.</div></div>
+    <div class="phase"><span class="pnum">1</span><h3>Prove it on what you have</h3><ol><li><strong>Step 0 — Check what you have:</strong> note your laptop's power, graphics memory, regular memory, and free space (marked TBD until you do this).</li><li>Install Ollama + Open WebUI, set to this machine only.</li><li>Download a small and a mid-size brain in one online window.</li><li>First airplane-mode test.</li></ol><details class="custom-adjust phase-steps"><summary>Do it — step by step</summary><ol><li>Do Step 0 first: note your machine's memory, graphics memory, and free space — every later choice hangs on those three numbers.</li><li>Install Ollama. On a Mac or Linux machine, run this in a terminal:<pre><code>curl -fsSL https://ollama.com/install.sh | sh</code></pre>On Windows, download the installer from ollama.com and run it instead.</li><li>Check the home base is awake: open http://127.0.0.1:11434 in your browser — it should answer &ldquo;Ollama is running&rdquo;.</li><li>Download the small starter brain — the one this guide uses for quick jobs:<pre><code>ollama pull llama3.1:8b</code></pre></li><li>Download the mid-size brain for everyday chat:<pre><code>ollama pull qwen3:14b</code></pre></li><li>Say hello — your first fully local chat:<pre><code>ollama run llama3.1:8b</code></pre></li><li>Add the chat screen — install Open WebUI with Docker:<pre><code>docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main</code></pre>Then open http://localhost:3000, make your local account, and pick one of your brains at the top.</li><li>First airplane-mode test: turn Wi-Fi off, ask a question in the chat screen — it answers with no connection at all.</li></ol></details><div class="exit"><strong>Exit test</strong>Private chat + dictation working offline on the current machine, $0 spent.</div></div>
+    <div class="phase"><span class="pnum">2</span><h3>Buy the tier, build it out</h3><ol><li>Make the open decisions below; buy once, at your level.</li><li>One big download window for the full brain library (budget the time — the biggest brain is ~40 GB).</li><li>Voice in and out, file search over your approved folders.</li><li>The Privacy and Security checklist, top to bottom.</li><li>A battery/generator test at real working load.</li></ol><details class="custom-adjust phase-steps"><summary>Do it — step by step</summary><ol><li>In one big online window, download your level's full brain library — your tier's kit is on the Hardware page. The biggest brain is ~40 GB, so give it time. One example:<pre><code>ollama pull qwen3:32b</code></pre></li><li>Add the tiny file-search brain (under 1 GB) so the stack can read your files:<pre><code>ollama pull nomic-embed-text</code></pre></li><li>In Open WebUI, add ONE folder you approve for file search, then ask a question only a file in that folder can answer — and check the answer really came from your file.</li><li>Add the ears: install faster-whisper, following its own install page while you're still online, then dictate a question — your speech becomes text on the machine and never leaves the room.</li><li>Add the voice: install Kokoro or Piper the same way, and have an answer read aloud.</li><li>Work the Privacy &amp; Security checklist on this page, top to bottom — this is the phase where it counts.</li><li>Power test: unplug from the wall, run a normal working session on your battery bank or generator, and note how many hours you actually get.</li></ol></details><div class="exit"><strong>Exit test</strong>The full stack passes airplane mode on the new machine, at the speed its level promised.</div></div>
+    <div class="phase"><span class="pnum">3</span><h3>Connect your helper agents</h3><ol><li>Point any helper agents you run at the home base on this machine.</li><li>Remove the cloud keys from their settings.</li><li>Give each job its brain: small and fast for background loops, big for deep work.</li><li>Run a normal day with Wi-Fi off, and honestly compare quality with the cloud setup.</li></ol><details class="custom-adjust phase-steps"><summary>Do it — step by step</summary><ol><li>In each helper's settings, point it at the home base on this machine — this address replaces the cloud:<pre><code>http://127.0.0.1:11434</code></pre></li><li>Delete the cloud keys from its settings — after this there is nothing left for it to phone home to.</li><li>See every brain on the machine, so you can hand out the jobs:<pre><code>ollama list</code></pre></li><li>Give each job its brain: the small fast one (llama3.1:8b) for background loops, your biggest for deep work.</li><li>Run a normal day with Wi-Fi off, and honestly compare the quality with the old cloud setup.</li><li>Before you call it done, work the &ldquo;Before you unplug&rdquo; checklist on this page, top to bottom — it holds the one-time jobs that are only easy while you're still connected.</li><li>Make your first backup copy: brains, settings, and file index onto an external drive — offline, that drive is the safety net.</li></ol></details><div class="exit"><strong>Exit test</strong>A full working day from your agents with the network down — and you'd choose to do it again.</div></div>
   </div>
 
   <div class="sub-head"><span class="tag">Do this while you're still connected</span><h3>Before you unplug</h3><p>One last pass while the internet is still there. Everything here is easy with a connection and hard — or impossible — without one.</p></div>
@@ -4035,6 +4073,101 @@
       if (window.__openStackIntake) window.__openStackIntake();
       return;
     }
+  });
+})();
+</script>
+<script>
+/* PWA: register the service worker, show the offline badge, and give
+   anything that needs the internet a clear "needs internet" state. */
+(function(){
+  var badge = document.getElementById('pwaBadge');
+  var saved = false;
+
+  function showBadge(state, text){
+    if (!badge) return;
+    badge.hidden = false;
+    badge.setAttribute('data-state', state);
+    badge.textContent = text;
+  }
+  function syncNetwork(){
+    var offline = navigator.onLine === false;
+    document.body.classList.toggle('is-offline', offline);
+    if (offline) showBadge('offline', saved ? "You're offline · guide still works" : "You're offline");
+    else if (saved) showBadge('ready', 'Available offline ✓');
+    else if (badge && badge.getAttribute('data-state') === 'offline') badge.hidden = true;
+  }
+
+  var toast, toastTimer;
+  function showToast(host){
+    if (!toast){
+      toast = document.createElement('div');
+      toast.className = 'net-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = '';
+    var s = document.createElement('strong'); s.textContent = 'Needs internet. ';
+    toast.appendChild(s);
+    toast.appendChild(document.createTextNode(host + ' is a website, so it needs a connection. Everything else in this guide works offline. Use "Copy the list" now and open the store when you are back online.'));
+    toast.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.hidden = true; }, 6000);
+  }
+
+  // Off-site links: stop the dead click and explain instead.
+  document.addEventListener('click', function(e){
+    if (navigator.onLine !== false) return;
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch(err){ return; }
+    if (!/^https?:$/.test(u.protocol) || u.origin === location.origin) return;
+    e.preventDefault();
+    e.stopPropagation();
+    showToast(u.hostname.replace(/^www\./, ''));
+  }, true);
+
+  window.addEventListener('online', syncNetwork);
+  window.addEventListener('offline', syncNetwork);
+  syncNetwork();
+
+  var secure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  if (!('serviceWorker' in navigator) || !secure) return;
+
+  function checkSaved(){
+    navigator.serviceWorker.ready.then(function(reg){
+      if (!reg.active) return;
+      var ch = new MessageChannel();
+      ch.port1.onmessage = function(ev){
+        if (ev.data && ev.data.ready){ saved = true; syncNetwork(); }
+      };
+      reg.active.postMessage({ type: 'STATUS' }, [ch.port2]);
+    });
+  }
+
+  function showUpdate(){
+    if (document.getElementById('pwaUpdate') || !badge) return;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.id = 'pwaUpdate';
+    b.className = 'pwa-update';
+    b.textContent = 'New version ready · Reload';
+    b.addEventListener('click', function(){ location.reload(); });
+    badge.parentNode.insertBefore(b, badge);
+  }
+
+  navigator.serviceWorker.addEventListener('message', function(e){
+    var d = e.data || {};
+    if (d.type === 'OFFLINE_READY') checkSaved();
+    if (d.type === 'UPDATED') showUpdate();
+  });
+
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js').then(function(reg){
+      if (reg.installing && !navigator.serviceWorker.controller) showBadge('saving', 'Saving for offline…');
+    }).catch(function(){ /* no badge if registration fails */ });
+    checkSaved();
   });
 })();
 </script>
