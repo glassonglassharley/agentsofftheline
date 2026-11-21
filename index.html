@@ -316,6 +316,8 @@
 
   /* SHOP */
   .shop-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);margin-bottom:18px}
+  .shop-upgrade{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 20px;box-shadow:var(--shadow);margin-bottom:14px}
+  .shop-upgrade p{margin:0;color:var(--ink2);font-size:14.5px}
   .shop-progress{font-family:system-ui,sans-serif;font-weight:700;font-size:15px}
   .shop-progress .mono{font-weight:600;font-size:14px;color:var(--amber);display:block}
   .shop-group{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin:26px 0 10px}
@@ -1392,9 +1394,10 @@
   /* ============================================================
      UPGRADE WHAT I ALREADY HAVE — the second path, beside the
      new-stack intake. The homepage teaser becomes a two-card
-     fork (Plan a new stack / Upgrade what I already have), and
-     the upgrade panel mirrors the intake's open/close shell,
-     form, and chip styles. Everything runs on this page.
+     fork (Plan a new stack / Improve the stack you already
+     have), and the upgrade path opens as its own full view,
+     reusing the intake's form and chip styles. Everything
+     runs on this page.
      ============================================================ */
   .intake-teaser{max-width:880px}
   .fork-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;align-items:stretch}
@@ -1404,39 +1407,45 @@
   .fork-card .intake-teaser-btn{margin-top:auto;font-size:15.5px;padding:12px 22px;min-height:50px;white-space:normal}
   @media (max-width:640px){ .fork-grid{grid-template-columns:1fr} .fork-card .intake-teaser-btn{width:100%} }
 
+  /* The upgrade path is a full view of its own, not a panel: opening
+     it puts body.upgrade-view on, the masthead and home extras go
+     away (mirroring the topic-view rules), the site header stays,
+     and #upgrade shows as a normal full page section. */
   #upgrade{display:none}
-  .hero #upgrade{padding-top:0;padding-bottom:0}
-  #upgrade.open{display:block;position:static;width:min(880px,100%);max-width:100%;margin:0 auto 18px;max-height:none;overflow:visible;background:var(--bg);border:1.5px solid var(--line-strong);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px 20px;text-align:left}
-  #upgrade .wrap{max-width:none;margin:0;padding:0}
-  #upgrade .sec-head{margin-bottom:14px}
+  body.upgrade-view #upgrade{display:block;text-align:left}
+  body.upgrade-view #masthead{display:none}
+  body.upgrade-view #homeExtras{display:none!important}
+  body.upgrade-view .site-header{display:block;position:static}
+  #upgrade .sec-head{margin-bottom:14px;align-items:flex-start;text-align:left;margin-left:0;margin-right:0}
   #upgrade .sec-head::after{display:none}
-  #upgrade .intake-close{float:right;font-family:system-ui,sans-serif;font-weight:700;font-size:13px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line-strong);border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer}
-  #upgrade .intake-close:hover{border-color:var(--amber);color:var(--amber)}
-  @media (max-width:640px){ #upgrade.open{width:100%;padding:18px 14px 16px} }
-  .up-privacy{margin:0 auto 14px;max-width:64ch;text-align:center;color:var(--ink2);font-size:13.5px;line-height:1.55}
-  .up-saved-note{margin:0 auto 12px;max-width:64ch;text-align:center;background:var(--teal-soft);border:1px solid var(--teal);border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--ink2)}
+  #upgradeBack{display:inline-flex;align-items:center;font-family:system-ui,sans-serif;font-weight:700;font-size:13.5px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line-strong);border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer;margin-bottom:16px}
+  #upgradeBack:hover{border-color:var(--amber);color:var(--amber)}
+  #upgradeBack:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .up-results-head{font-family:var(--serif);font-weight:700;font-size:26px;letter-spacing:-.01em;margin:0 0 6px;text-align:left}
+  .up-privacy{margin:0 0 14px;max-width:64ch;text-align:left;color:var(--ink2);font-size:13.5px;line-height:1.55}
+  .up-saved-note{margin:0 0 12px;max-width:64ch;text-align:left;background:var(--teal-soft);border:1px solid var(--teal);border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--ink2)}
   .up-saved-note[hidden]{display:none}
   .upgrade-form input[type="text"]{width:100%;font:inherit;font-family:system-ui,sans-serif;font-size:14px;padding:10px;border-radius:9px;border:1.5px solid var(--line-strong);background:var(--surface);color:var(--ink);text-align:left}
   @media (max-width:640px){ .upgrade-form input[type="text"]{font-size:16px;min-height:48px} }
-  .up-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:640px;margin:0 auto}
+  .up-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;max-width:640px;margin:0}
   .intake-q label.up-chip{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:0;font-family:system-ui,sans-serif;font-weight:600;font-size:13.5px;padding:9px 14px;min-height:44px;border:1.5px solid var(--line-strong);border-radius:999px;background:var(--surface2);color:var(--ink2);cursor:pointer;max-width:none;margin:0;text-align:center}
   .intake-q label.up-chip:hover{border-color:var(--amber);color:var(--amber)}
   .up-chip input[type="checkbox"]{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
   .up-chip:has(input:checked){background:var(--ink);color:var(--bg);border-color:var(--ink)}
   .up-chip:has(input:focus-visible){outline:3px solid var(--teal);outline-offset:2px}
-  .up-save-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin-top:16px}
+  .up-save-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-start;margin-top:16px}
   #upResults{margin-top:6px}
   #upResults:empty{display:none}
-  .up-verdict{margin-top:18px;background:var(--teal-soft);border:1.5px solid var(--teal);border-radius:var(--radius);padding:18px;text-align:center}
+  .up-verdict{margin-top:18px;background:var(--teal-soft);border:1.5px solid var(--teal);border-radius:var(--radius);padding:18px;text-align:left;max-width:760px}
   .up-verdict h3{margin:0 0 6px;font-size:16.5px;font-weight:800;color:var(--teal)}
-  .up-verdict p{margin:0 auto;color:var(--ink2);font-size:14px;max-width:64ch}
-  .up-ceiling{margin-top:18px;background:var(--rust-soft);border:1.5px solid var(--rust);border-radius:var(--radius);padding:18px;text-align:center}
+  .up-verdict p{margin:0;color:var(--ink2);font-size:14px;max-width:64ch}
+  .up-ceiling{margin-top:18px;background:var(--rust-soft);border:1.5px solid var(--rust);border-radius:var(--radius);padding:18px;text-align:left;max-width:760px}
   .up-ceiling h3{margin:0 0 6px;font-size:16.5px;font-weight:800;color:var(--rust)}
-  .up-ceiling p{margin:0 auto 12px;color:var(--ink2);font-size:14px;max-width:64ch}
+  .up-ceiling p{margin:0 0 12px;color:var(--ink2);font-size:14px;max-width:64ch}
   .up-band{margin-top:20px}
-  .up-band>h3{font-family:var(--serif);font-weight:700;font-size:19px;margin:0 0 4px;text-align:center}
-  .up-band>.up-band-sub{margin:0 auto 12px;text-align:center;color:var(--muted);font-size:13px}
-  .up-rec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:0 auto 10px;max-width:760px;text-align:left}
+  .up-band>h3{font-family:var(--serif);font-weight:700;font-size:19px;margin:0 0 4px;text-align:left}
+  .up-band>.up-band-sub{margin:0 0 12px;text-align:left;color:var(--muted);font-size:13px}
+  .up-rec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:0 0 10px;max-width:760px;text-align:left}
   .up-rec h4{margin:0 0 5px;font-size:15px;font-weight:700;text-align:left}
   .up-rec p{margin:0 0 6px;color:var(--ink2);font-size:13.5px;line-height:1.55;text-align:left}
   .up-rec p.up-gain{color:var(--ink)}
@@ -1446,7 +1455,7 @@
   .up-rec-btns button:hover{border-color:var(--amber);color:var(--amber)}
   .up-rec-btns button.up-store-btn{background:var(--ink);color:var(--bg);border-color:var(--ink)}
   .up-rec-btns button.up-store-btn:hover{background:var(--amber);color:#fff;border-color:var(--amber)}
-  .up-empty{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;text-align:center;color:var(--ink2);font-size:14px}
+  .up-empty{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;text-align:left;color:var(--ink2);font-size:14px;max-width:760px}
 </style>
 <!-- PWA -->
 <link rel="manifest" href="/manifest.webmanifest" />
@@ -1649,7 +1658,9 @@
   </div>
 </section>
 <section id="upgrade" aria-label="Upgrade what I already have"><div class="wrap">
-  <div class="sec-head"><button type="button" class="intake-close" id="upgradeClose">Close ✕</button><span class="tag">Upgrade your stack</span><h2>Make the stack you own better</h2><p>Tell the guide what you already run, and get ranked fixes — biggest win for the least effort first. Anything worth buying gets ticked for you in the Shopping List.</p></div>
+  <button type="button" id="upgradeBack">← Back</button>
+  <div id="upFormWrap">
+  <div class="sec-head"><span class="tag">Upgrade your stack</span><h2>Make the stack you own better</h2><p>Tell the guide what you already run, and get practical ways to make it more local, more open, and more secure. Anything worth buying gets ticked for you in the Shopping List.</p></div>
   <p class="up-privacy">Your answers never leave this device — no account, no server, nothing sent anywhere.</p>
   <p class="up-saved-note" id="upSavedNote" hidden>Your build was restored — it is saved on this device only.</p>
   <form class="intake-form upgrade-form" id="upgradeForm">
@@ -1674,14 +1685,19 @@
         </select>
       </div>
       <div class="intake-q">
-        <span class="q-label" id="qUpGpu">Graphics (GPU)</span>
-        <p class="q-hint">A graphics card, Apple built-in graphics, or none — whatever you have.</p>
-        <input type="text" id="upGpu" aria-labelledby="qUpGpu" placeholder="Apple built-in, RTX 3060, none / not sure" autocomplete="off" />
-      </div>
-      <div class="intake-q">
         <span class="q-label" id="qUpBrains">Brains running now</span>
         <p class="q-hint">The model name and size you run today, if any.</p>
         <input type="text" id="upBrains" aria-labelledby="qUpBrains" placeholder="llama 3.1 8b" autocomplete="off" />
+      </div>
+      <div class="intake-q">
+        <span class="q-label" id="qUpBrainSource">Where did it come from?</span>
+        <p class="q-hint">Where the brain came from tells the guide how open it is.</p>
+        <select id="upBrainSource" aria-labelledby="qUpBrainSource">
+          <option value="ollama">Ollama library</option>
+          <option value="hf">Hugging Face</option>
+          <option value="preinstalled">Came preinstalled</option>
+          <option value="notsure" selected>Not sure</option>
+        </select>
       </div>
       <fieldset class="intake-q">
         <legend>Software stack</legend>
@@ -1694,9 +1710,35 @@
         <label><input type="checkbox" name="upSoftware" value="none" /> None yet</label>
       </fieldset>
       <fieldset class="intake-q">
+        <legend>What still needs the internet?</legend>
+        <p class="q-hint">Any part of the setup that still reaches out to a cloud service.</p>
+        <div class="up-chips">
+          <label class="up-chip"><input type="checkbox" name="upCloud" value="cloudchat" /><span>Cloud chat</span></label>
+          <label class="up-chip"><input type="checkbox" name="upCloud" value="cloudvoice" /><span>Cloud voice</span></label>
+          <label class="up-chip"><input type="checkbox" name="upCloud" value="cloudfiles" /><span>Cloud file sync</span></label>
+          <label class="up-chip"><input type="checkbox" name="upCloud" value="none" /><span>Nothing — it's all local</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="intake-q">
+        <legend>How it connects</legend>
+        <p class="q-hint">The machine's connection habit, most days.</p>
+        <div class="up-chips">
+          <label class="up-chip"><input type="checkbox" name="upConnect" value="allday" /><span>Online all day</span></label>
+          <label class="up-chip"><input type="checkbox" name="upConnect" value="downloads" /><span>Online only for downloads</span></label>
+          <label class="up-chip"><input type="checkbox" name="upConnect" value="offline" /><span>Always offline</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="intake-q">
+        <legend>Accounts on this machine</legend>
+        <p class="q-hint">Whether the stack machine is signed into anything.</p>
+        <div class="up-chips">
+          <label class="up-chip"><input type="checkbox" name="upAccounts" value="some" /><span>Signed into some accounts</span></label>
+          <label class="up-chip"><input type="checkbox" name="upAccounts" value="none" /><span>No accounts on this machine</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="intake-q">
         <legend>Your situation</legend>
         <p class="q-hint">How and where the machine lives.</p>
-        <label><input type="checkbox" name="upSituation" value="allday" /> Runs all day</label>
         <label><input type="checkbox" name="upSituation" value="quiet" /> Must stay quiet</label>
         <label><input type="checkbox" name="upSituation" value="travels" /> Travels with me</label>
         <label><input type="checkbox" name="upSituation" value="offgrid" /> Off-grid / battery</label>
@@ -1714,20 +1756,20 @@
     </div>
     <fieldset class="intake-q" style="margin-top:20px">
       <legend>What's frustrating?</legend>
-      <p class="q-hint">This is the key question — tap everything that sounds familiar. The ranking is built from these.</p>
+      <p class="q-hint">This is the key question — tap everything that sounds familiar. The ways to improve it are built from these.</p>
       <div class="up-chips">
-        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="slow" /><span>Too slow</span></label>
-        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="dumb" /><span>Answers feel dumb</span></label>
-        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="oom" /><span>Runs out of memory or crashes</span></label>
-        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="loud" /><span>Too loud or hot</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="phoneshome" /><span>It phones home</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="distrust" /><span>I don't trust one of the apps</span></label>
         <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="novoice" /><span>No voice yet</span></label>
-        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="nofiles" /><span>Can't search my files</span></label>
-        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="storage" /><span>Storage filling up</span></label>
-        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="fragile" /><span>Setup feels fragile</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="nofiles" /><span>Can't use my own files</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="dumb" /><span>Answers could be better</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="slow" /><span>Too slow</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="loud" /><span>Too loud or hot</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="fragile" /><span>Worried an update breaks it</span></label>
       </div>
     </fieldset>
     <div class="intake-actions">
-      <button class="btn primary" id="upRun" type="submit" style="background:var(--amber-bright);color:#1c1305">Rank my upgrades →</button>
+      <button class="btn primary" id="upRun" type="submit" style="background:var(--amber-bright);color:#1c1305">See ways to improve it →</button>
       <span class="btn-msg" id="upMsg" role="status" style="color:var(--amber)"></span>
     </div>
   </form>
@@ -1742,7 +1784,14 @@
     <button class="btn" id="upForgetYes" type="button" style="background:var(--rust);border:1.5px solid var(--rust);color:#fff">Yes, forget it</button>
     <button class="btn" id="upForgetNo" type="button" style="background:transparent;border:1.5px solid var(--line-strong);color:var(--ink2)">Keep my build</button>
   </div>
-  <div id="upResults" aria-live="polite"></div>
+  </div>
+  <div id="upResultsWrap" hidden>
+    <h2 class="up-results-head">Ways to make it more local, open, and secure</h2>
+    <div id="upResults" aria-live="polite"></div>
+    <div class="up-save-actions">
+      <button class="btn" id="upEditAnswers" type="button" style="background:transparent;border:1.5px solid var(--line-strong);color:var(--ink2)">← Edit my answers</button>
+    </div>
+  </div>
 </div></section>
     <div id="masthead">
     <h1>Your personal agent, running on your machine — <em>with the internet unplugged</em></h1>
@@ -1765,9 +1814,9 @@
             <button type="button" class="intake-teaser-btn" id="intakeTeaserBtn">Start Here →</button>
           </div>
           <div class="fork-card">
-            <h3>Make the stack you own better</h3>
-            <p>Already running something? Tell the guide what you have, and get your fixes ranked — biggest win for the least effort first.</p>
-            <button type="button" class="intake-teaser-btn" id="upgradeTeaserBtn">Rank my upgrades →</button>
+            <h3>Improve the stack you already have</h3>
+            <p>Tell the guide what you're running today — your machine, your brain, your apps. Get practical ways to make it more local, more open, and more secure. Nothing leaves this device.</p>
+            <button type="button" class="intake-teaser-btn" id="upgradeTeaserBtn">See ways to improve it →</button>
           </div>
         </div>
       </div>
@@ -2348,6 +2397,10 @@
       <button type="button" class="store-filter" data-filter="connect">Connect</button>
       <button type="button" class="store-filter" data-filter="power">Power</button>
     </div>
+  </div>
+  <div class="shop-upgrade">
+    <p>Tell the guide what you own — get ways to make it more local, open, and secure.</p>
+    <button class="btn primary" id="shopUpgradeBtn" type="button" style="background:var(--amber-bright);color:#1c1305">Already running a stack? Upgrade what I already have →</button>
   </div>
   <div class="shop-tools">
     <div class="shop-progress"><span id="shopCount">0 of 0 in your build</span><span class="mono" id="shopTotal">Rough total of ticked items: $0</span></div>
@@ -4354,6 +4407,7 @@
     hardware: 'See Hardware →',
     power: 'See Power →',
     overview: 'See The Stack →',
+    privacy: 'See Privacy and Security →',
     shop: 'See the Shopping List →'
   };
 
@@ -4368,28 +4422,56 @@
     form.querySelectorAll('input[name="' + name + '"]').forEach(function(c){ c.checked = values.indexOf(c.value) >= 0; });
   }
 
-  // ---- Open / close, mirroring the intake's mechanics ----
+  // ---- Open / close: a full view of its own (body.upgrade-view),
+  // not a panel over the homepage. Opening swaps the homepage for
+  // the form view; Back (or the header Home icon, or Escape)
+  // returns to the two-path homepage exactly as it was. ----
+  var formWrap = $('upFormWrap');
+  var resultsWrap = $('upResultsWrap');
+  function showFormState(){
+    if (formWrap) formWrap.hidden = false;
+    if (resultsWrap) resultsWrap.hidden = true;
+  }
+  function showResultsState(){
+    if (formWrap) formWrap.hidden = true;
+    if (resultsWrap) resultsWrap.hidden = false;
+  }
   function closeUpgrade(){
-    upgradeSection.classList.remove('open');
+    document.body.classList.remove('upgrade-view');
     var b = $('upgradeTeaserBtn'); if (b) b.setAttribute('aria-expanded','false');
+  }
+  function backHome(){
+    closeUpgrade();
+    if (typeof window.__showRoadmapHome === 'function') window.__showRoadmapHome();
+    try { window.scrollTo({ top:0, behavior:'smooth' }); } catch(e){ window.scrollTo(0, 0); }
   }
   function openUpgrade(){
     // Only one of intake / upgrade open at a time
     if (intakeSection){ intakeSection.classList.remove('open'); intakeSection.classList.remove('home-on'); }
     var hib = $('headerIntakeBtn'); if (hib) hib.setAttribute('aria-expanded','false');
-    upgradeSection.classList.add('open');
+    showFormState();
+    document.body.classList.add('upgrade-view');
     var b = $('upgradeTeaserBtn'); if (b) b.setAttribute('aria-expanded','true');
-    setTimeout(function(){ try { upgradeSection.scrollIntoView({ behavior:'smooth', block:'start' }); } catch(e){} }, 40);
-    var c = $('upgradeClose'); if (c) { try { c.focus(); } catch(e){} }
+    try { window.scrollTo({ top:0, behavior:'smooth' }); } catch(e){ window.scrollTo(0, 0); }
+    var bk = $('upgradeBack'); if (bk) { try { bk.focus(); } catch(e){} }
   }
   window.__openStackUpgrade = openUpgrade;
   window.__closeStackUpgrade = closeUpgrade;
   var teaserBtn = $('upgradeTeaserBtn');
   if (teaserBtn) teaserBtn.addEventListener('click', function(){ openUpgrade(); });
-  var closeBtn = $('upgradeClose');
-  if (closeBtn) closeBtn.addEventListener('click', function(){ closeUpgrade(); if (teaserBtn) { try { teaserBtn.focus(); } catch(e){} } });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && upgradeSection.classList.contains('open')) closeUpgrade(); });
-  // Opening the intake closes the upgrade panel (and the other way
+  var backBtn = $('upgradeBack');
+  if (backBtn) backBtn.addEventListener('click', function(){ backHome(); if (teaserBtn) { try { teaserBtn.focus(); } catch(e){} } });
+  var editBtn = $('upEditAnswers');
+  if (editBtn) editBtn.addEventListener('click', function(){
+    showFormState();
+    try { window.scrollTo({ top:0, behavior:'smooth' }); } catch(e){ window.scrollTo(0, 0); }
+  });
+  // The header Home icon returns home too — make sure it also
+  // leaves this view (its own handler calls showHome()).
+  var homeBtn = $('headerHomeBtn');
+  if (homeBtn) homeBtn.addEventListener('click', function(){ closeUpgrade(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && document.body.classList.contains('upgrade-view')) backHome(); });
+  // Opening the intake exits the upgrade view (and the other way
   // round is handled in openUpgrade above)
   if (typeof window.__openStackIntake === 'function'){
     var origOpenIntake = window.__openStackIntake;
@@ -4400,6 +4482,15 @@
       new MutationObserver(function(){
         if (intakeSection.classList.contains('open')) closeUpgrade();
       }).observe(intakeSection, { attributes:true, attributeFilter:['class'] });
+    } catch(e){}
+  }
+  // If a topic tab gets activated while this view is open (header
+  // menu, a section link), the view state must not survive.
+  if (typeof MutationObserver !== 'undefined'){
+    try {
+      new MutationObserver(function(){
+        if (document.body.classList.contains('topic-view') && document.body.classList.contains('upgrade-view')) closeUpgrade();
+      }).observe(document.body, { attributes:true, attributeFilter:['class'] });
     } catch(e){}
   }
 
@@ -4444,13 +4535,17 @@
     return isNaN(n) ? null : n;
   }
 
+  function isArr(v){ return Object.prototype.toString.call(v) === '[object Array]'; }
   function collectBuild(){
     return {
       machine: $('upMachine').value,
       ram: $('upRam').value,
-      gpu: $('upGpu').value,
       brains: $('upBrains').value,
+      brainSource: $('upBrainSource') ? $('upBrainSource').value : '',
       software: checkedValues('upSoftware'),
+      cloud: checkedValues('upCloud'),
+      connect: checkedValues('upConnect'),
+      accounts: checkedValues('upAccounts'),
       situation: checkedValues('upSituation'),
       working: $('upWorking').value,
       frustrations: checkedValues('upFrustration'),
@@ -4459,14 +4554,28 @@
   }
   function applyBuild(d){
     if (!d) return;
+    // Old builds and old files load without errors: unknown fields
+    // (like the retired gpu field) are ignored, missing new fields
+    // keep their defaults.
     if (typeof d.machine === 'string') $('upMachine').value = d.machine;
     if (typeof d.ram === 'string' || typeof d.ram === 'number') $('upRam').value = String(d.ram);
-    if (typeof d.gpu === 'string') $('upGpu').value = d.gpu;
     if (typeof d.brains === 'string') $('upBrains').value = d.brains;
-    if (Object.prototype.toString.call(d.software) === '[object Array]') setChecked('upSoftware', d.software);
-    if (Object.prototype.toString.call(d.situation) === '[object Array]') setChecked('upSituation', d.situation);
+    if (typeof d.brainSource === 'string' && $('upBrainSource')){
+      var bs = $('upBrainSource');
+      for (var i = 0; i < bs.options.length; i++){ if (bs.options[i].value === d.brainSource) bs.value = d.brainSource; }
+    }
+    if (isArr(d.software)) setChecked('upSoftware', d.software);
+    if (isArr(d.cloud)) setChecked('upCloud', d.cloud);
+    if (isArr(d.connect)) setChecked('upConnect', d.connect);
+    if (isArr(d.accounts)) setChecked('upAccounts', d.accounts);
+    if (isArr(d.situation)){
+      setChecked('upSituation', d.situation);
+      // Legacy builds used situation "allday" for the connection
+      // habit — that answer now lives in the connect chips.
+      if (d.situation.indexOf('allday') >= 0 && !isArr(d.connect)) setChecked('upConnect', ['allday']);
+    }
     if (typeof d.working === 'string') $('upWorking').value = d.working;
-    if (Object.prototype.toString.call(d.frustrations) === '[object Array]') setChecked('upFrustration', d.frustrations);
+    if (isArr(d.frustrations)) setChecked('upFrustration', d.frustrations);
     if (typeof d.frustrationText === 'string') $('upFrustrationText').value = d.frustrationText;
   }
   function saveBuild(){
@@ -4509,11 +4618,11 @@
         if (savedNote) savedNote.hidden = false;
         if (upMsg) upMsg.textContent = 'Build loaded — saved on this device.';
       } catch(e){
-        resultsEl.innerHTML = '<div class="up-empty">That file could not be read as a build file — nothing was changed. Pick a file saved with “Download my build”.</div>';
+        if (upMsg) upMsg.textContent = 'That file could not be read as a build file — nothing was changed. Pick a file saved with “Download my build”.';
       }
     };
     reader.onerror = function(){
-      resultsEl.innerHTML = '<div class="up-empty">That file could not be read — nothing was changed.</div>';
+      if (upMsg) upMsg.textContent = 'That file could not be read — nothing was changed.';
     };
     reader.readAsText(f);
   });
@@ -4528,6 +4637,7 @@
     try { localStorage.removeItem(STORE_KEY); } catch(e){}
     form.reset();
     resultsEl.innerHTML = '';
+    showFormState();
     if (savedNote) savedNote.hidden = true;
     if (upMsg) upMsg.textContent = '';
     if (forgetConfirm) forgetConfirm.hidden = true;
@@ -4555,57 +4665,156 @@
     }
   }
 
-  // ---- The recommendation engine ----
+  // ---- The recommendation engine: concrete steps grouped by
+  // goal — more local, more open, more secure, and worth doing
+  // anyway. Nothing is scored or put in order of importance;
+  // the visitor picks the goals that matter to them. ----
+  function biggestComfortable(ram){
+    if (!ram) return null;
+    var best = null;
+    for (var i = 0; i < LADDER.length; i++){ if (fit(LADDER[i], ram) === 'comfortable') best = LADDER[i]; }
+    return best;
+  }
   function runUpgrade(){
     var b = collectBuild();
     var machine = (b.machine || '').toLowerCase();
     var brainsText = (b.brains || '').toLowerCase();
     var ram = parseInt(b.ram, 10); if (isNaN(ram)) ram = 0;
     var cur = parseBrainParams(b.brains);
-    var frust = b.frustrations;
-    var software = b.software;
-    var situation = b.situation;
+    var frust = b.frustrations || [];
+    var software = b.software || [];
+    var situation = b.situation || [];
+    var cloud = b.cloud || [];
+    var connect = b.connect || [];
+    var accounts = b.accounts || [];
+    var brainSource = b.brainSource || '';
+    var freeText = (b.frustrationText || '').toLowerCase();
     function hasFrust(v){ return frust.indexOf(v) >= 0; }
     function hasSoft(v){ return software.indexOf(v) >= 0; }
     function hasSit(v){ return situation.indexOf(v) >= 0; }
+    function hasCloud(v){ return cloud.indexOf(v) >= 0; }
+    // Legacy builds answered "allday" as a situation chip; it is
+    // the connection habit now, and still counts either way.
+    var allDay = connect.indexOf('allday') >= 0 || situation.indexOf('allday') >= 0;
+    // Two comfort chips were retired; their rules now listen to
+    // the free-text field for the same complaints in plain words.
+    var oom = /(out of memory|memory|crash|oom)/.test(freeText);
+    var storageFull = /(storage|disk|disc|drive is full|out of space|no space|filling up)/.test(freeText);
     var isPi = machine.indexOf('raspberry') >= 0 || /(^|[^a-z])pi([^a-z]|$)/.test(machine);
     var brainName = b.brains ? esc(b.brains) : 'your current brain';
     var machineName = b.machine ? esc(b.machine) : 'this machine';
+    var closedBrain = /(gpt|chatgpt|claude|copilot|gemini)/.test(brainsText);
 
-    var healthy = frust.length === 0 && hasSoft('ollama') && hasSoft('openwebui') &&
-      (!ram || !cur || fit(cur, ram) === 'comfortable');
+    // The honesty verdict: nothing needs the cloud, the brain is
+    // an open-weight one the visitor chose, the machine is not
+    // online all day, and nothing is frustrating them.
+    var noCloud = cloud.length === 0 || (cloud.length === 1 && cloud[0] === 'none');
+    var openSource = brainSource === 'ollama' || brainSource === 'hf';
+    var modestConnect = !allDay && (connect.indexOf('downloads') >= 0 || connect.indexOf('offline') >= 0);
+    var verdict = noCloud && openSource && modestConnect && frust.length === 0;
     var ceiling = !!ram && ram <= 8 && (
       (cur != null && cur >= 32) ||
       ((hasFrust('dumb') || hasFrust('slow')) && cur != null && cur >= 8)
     );
 
-    var free = [], cheap = [], big = [];
+    var local = [], open = [], secure = [], anyway = [];
     var pushedTitles = {};
     function push(list, rec){
       if (pushedTitles[rec.title]) return;
       pushedTitles[rec.title] = true;
       list.push(rec);
     }
+    var frontDoorAdvice = false;
+    var brainSwapAdvice = false;
+    var brainSizeAdvice = false;
 
-    if (hasFrust('oom')){
+    // ---------- MORE LOCAL ----------
+    var chatCovered = false;
+    if (hasCloud('cloudchat')){
+      push(local, { title:'Run your chat fully local — Ollama + Open WebUI', why:'You said chat still needs the internet. Run the chat on this machine instead: Ollama as the home base, Open WebUI as the front door — the same kind of conversation, with no cloud account in the middle and nothing leaving the house.', effort:'An evening', tab:'software' });
+      chatCovered = true;
+      frontDoorAdvice = true;
+    }
+    if (!hasSoft('ollama') && !chatCovered){
+      push(local, { title:'Add Ollama — the home base', why:'Your software stack is missing Ollama, the one home base every app and helper talks to in this guide’s architecture — and the piece that keeps the brains living on this machine.', effort:'Ten minutes', tab:'overview' });
+    }
+    if (hasCloud('cloudvoice') || hasFrust('novoice') || !hasSoft('voice')){
+      push(local, { title:'Add local voice — hear and be heard', why:(hasCloud('cloudvoice') ? 'You said voice still needs the internet. ' : (hasFrust('novoice') ? 'You flagged “No voice yet”. ' : 'Your software stack has no voice piece yet. ')) + 'Build Plan phase 2 does it the offline way: faster-whisper listens, and Kokoro or Piper speaks — all on the machine, nothing sent out to be transcribed.', effort:'An evening', tab:'plan' });
+    }
+    if (hasCloud('cloudfiles') || hasFrust('nofiles') || !hasSoft('rag')){
+      push(local, { title:'Search your own files, locally', why:(hasCloud('cloudfiles') ? 'You said your files still sync through a cloud. ' : (hasFrust('nofiles') ? 'You flagged “Can’t use my own files”. ' : 'Your software stack has no file search yet. ')) + 'Add nomic-embed-text — under 1 GB, a utility, not a chat brain — and point file search at the folders you approve, on this machine only.', effort:'An evening', tab:'software' });
+    }
+    if (allDay){
+      push(local, { title:'Connect on a schedule, then unplug', why:'This machine is online all day. Flip the habit: connect in planned windows to fetch new brains and updates, then unplug and work offline the rest of the time. The proof it works is the airplane-mode test from the Build Plan checklist — if the stack passes with Wi-Fi off, it never needed the connection.', effort:'Ten minutes', tab:'plan' });
+    }
+
+    // ---------- MORE OPEN ----------
+    if (brainSource === 'preinstalled' || brainSource === 'notsure' || closedBrain){
+      var bc = biggestComfortable(ram);
+      var openWhy = closedBrain
+        ? 'The brain you named is a closed, rented one — it can change or be taken away, and you can never look inside it. '
+        : (brainSource === 'preinstalled'
+          ? 'A preinstalled brain is a black box — you did not choose it, and you cannot inspect what it is. '
+          : 'If you are not sure where the brain came from, you cannot be sure what it is. ');
+      if (bc && cur && cur >= bc) openWhy += 'An open-weight brain in the ' + bc + 'B class — the size class you already run — takes about ' + sizeText(bc) + ' GB at Q4_K_M and sits comfortably in your ' + ram + ' GB. ';
+      else if (bc) openWhy += 'Your ' + ram + ' GB of memory comfortably holds an open-weight ' + bc + 'B brain at Q4_K_M (about ' + sizeText(bc) + ' GB) — the biggest class with real headroom to spare. ';
+      else if (ram) openWhy += 'On ' + ram + ' GB of memory, stay with a small open-weight brain — the size table in Software & Brains shows what fits. ';
+      else openWhy += 'Pick the open-weight size your memory holds comfortably — the size table in Software & Brains lays out the numbers. ';
+      openWhy += 'Open weights can be inspected, kept, and never taken away.';
+      push(open, { title:'Swap in an open-weight brain', why:openWhy, effort:'An evening', tab:'software' });
+      brainSwapAdvice = true;
+      if (bc) brainSizeAdvice = true;
+    }
+    if (!hasSoft('openwebui') && !frontDoorAdvice){
+      push(open, { title:'Add Open WebUI — the open front door', why:'Your software stack is missing Open WebUI, the open chat window that sits on top of Ollama in this guide’s architecture — a front door you control, instead of a closed app’s window onto your own machine.', effort:'An evening', tab:'software' });
+      frontDoorAdvice = true;
+    }
+    if (hasFrust('distrust')){
+      if (!frontDoorAdvice){
+        push(open, { title:'Swap the app you don’t trust for Open WebUI', why:'You flagged “I don’t trust one of the apps”. If the chat app is the closed piece, replace it with Open WebUI — open source, running on this machine, with nothing to phone home to.', effort:'An evening', tab:'software' });
+        frontDoorAdvice = true;
+      } else if (!brainSwapAdvice){
+        push(open, { title:'Swap the brain you don’t trust for an open-weight one', why:'You flagged “I don’t trust one of the apps”. If the brain is the closed piece, an open-weight replacement can be inspected before it ever runs — and once it is on your disk, it is yours to keep.', effort:'An evening', tab:'software' });
+        brainSwapAdvice = true;
+      }
+    }
+
+    // ---------- MORE SECURE ----------
+    if (allDay){
+      push(secure, { title:'Keep Ollama on this machine only', why:'While the machine is online all day, Ollama should listen on 127.0.0.1 — this machine only — not on the house network, where anything else on the Wi-Fi could reach it.', effort:'Ten minutes', tab:'privacy' });
+      push(secure, { title:'Switch off telemetry, trim app permissions', why:'Apps that sit online all day tend to report home and ask for broad permissions. Turn telemetry off, and give each app only the folders and access it actually needs.', effort:'Ten minutes', tab:'privacy' });
+    } else if (hasFrust('phoneshome')){
+      push(secure, { title:'Switch off telemetry, trim app permissions', why:'You flagged “It phones home”. Turn telemetry off in every app that offers the switch, and give each app only the folders and access it actually needs.', effort:'Ten minutes', tab:'privacy' });
+      push(secure, { title:'Bind Ollama to this machine — and work unplugged', why:'Set Ollama to listen on 127.0.0.1 only, so nothing else on the network can reach it, and make working unplugged the habit. The airplane-mode test proves the stack needs no connection at all.', effort:'Ten minutes', tab:'privacy' });
+    }
+    if (hasFrust('fragile')){
+      push(secure, { title:'Back up first, then update in planned batches', why:'You flagged “Worried an update breaks it”. The calm order is: back up the whole stack first, then update in planned batches you choose. If an update disappoints, you restore instead of rebuilding.', effort:'One purchase', tab:'plan', store:'backup' });
+    }
+    if (accounts.indexOf('some') >= 0){
+      push(secure, { title:'Trim the accounts signed in on this machine', why:'Every account signed in on the stack machine is a thread back to a company. Sign out of everything the stack does not truly need — an offline stack works with no accounts at all.', effort:'Ten minutes', tab:'privacy' });
+    }
+
+    // ---------- WORTH DOING ANYWAY ----------
+    if (oom){
       var down = cur != null ? prevDown(cur) : null;
-      var oomWhy = 'You flagged running out of memory' + (cur ? ', and ' + brainName + ' at Q4 takes about ' + sizeText(cur) + ' GB before it even starts thinking' : '') + (ram ? ' — on ' + ram + ' GB of memory there is no slack left for the system itself.' : '.');
-      var oomGain = down
-        ? 'Stepping down to a ' + down + 'B brain at Q4_K_M (about ' + sizeText(down) + ' GB) frees real headroom — expect the crashes to stop, at a small cost in smarts.'
-        : 'Running the Q4_K_M quant — the sweet-spot quant in this guide — is the smallest honest size for a brain. Expect the crashes to stop, at a small cost in top-end smarts.';
-      push(free, { title:'Step down to Q4_K_M — or one brain size smaller', why:oomWhy, gain:oomGain, tab:'software' });
+      var oomWhy = 'Your note mentions memory trouble' + (cur ? ', and ' + brainName + ' at Q4 takes about ' + sizeText(cur) + ' GB before it even starts thinking' : '') + (ram ? ' — on ' + ram + ' GB of memory there is no slack left for the system itself.' : '.');
+      var oomEffort = down
+        ? 'Step down to a ' + down + 'B brain at Q4_K_M (about ' + sizeText(down) + ' GB) and the headroom comes back — the crashes stop, at a small cost in smarts.'
+        : 'Run the Q4_K_M quant — the sweet-spot quant in this guide — the smallest honest size for a brain, and the crashes stop.';
+      push(anyway, { title:'Step down to Q4_K_M — or one brain size smaller', why:oomWhy + ' ' + oomEffort, effort:'Ten minutes', tab:'software' });
     }
 
     if (hasFrust('slow')){
       if (isPi){
-        push(free, { title:'Tune around the Pi’s honest speed', why:'You flagged “Too slow” on ' + machineName + '. Plainly: the Pi is a starter brain — a few tokens a second is its nature, not a fault in your setup. Settings still help at the edges: close everything else, keep the context modest, and let it do short jobs and helper work.', gain:'Expect a small lift from tidier settings — not a transformation. A few tokens a second is what a Pi gives, and for short questions and always-on helper jobs that is genuinely enough.', tab:'software' });
-        push(big, { title:'The real speed jump is a bigger machine', why:'No setting changes what a Pi is. If you want live, natural chat, the honest step is a machine with real memory — the Pi stays useful afterwards as the always-on helper.', gain:'A mid-size machine runs brains at a comfortable reading pace and faster — the difference is night and day next to a few tokens a second.', tab:'hardware' });
+        push(anyway, { title:'Tune around the Pi’s honest speed', why:'You flagged “Too slow” on ' + machineName + '. Plainly: the Pi is a starter brain — a few tokens a second is its nature, not a fault in your setup. Settings still help at the edges: close everything else, keep the context modest, and let it do short jobs and helper work.', effort:'Ten minutes', tab:'software' });
+        push(anyway, { title:'The real speed jump is a bigger machine', why:'No setting changes what a Pi is. If you want live, natural chat, the honest step is a machine with real memory — the Pi stays useful afterwards as the always-on helper.', effort:'One purchase', tab:'hardware' });
       } else {
-        push(free, { title:'Right-size the job before buying anything', why:'You flagged “Too slow”' + (cur ? ' running ' + brainName : '') + '. The usual causes are free to fix: other apps eating memory, a context window far bigger than the conversation needs, or a quant heavier than Q4_K_M.', gain:'Expect a noticeable lift from closing rivals and keeping context modest — often the difference between laggy and usable, for $0.', tab:'software' });
-        if (cur != null && cur <= 8 && ram){
+        push(anyway, { title:'Right-size the job before buying anything', why:'You flagged “Too slow”' + (cur ? ' running ' + brainName : '') + '. The usual causes cost nothing to fix: other apps eating memory, a context window far bigger than the conversation needs, or a quant heavier than Q4_K_M.', effort:'Ten minutes', tab:'software' });
+        if (cur != null && cur <= 8 && ram && !brainSizeAdvice){
           var upSlow = nextUp(cur);
-          if (upSlow && upSlow < 70 && fit(upSlow, ram) === 'comfortable' && !hasFrust('oom')){
-            push(free, { title:'Pull the next brain size up — a ' + upSlow + 'B', why:'Your ' + ram + ' GB of memory fits a ' + upSlow + 'B brain at Q4_K_M (about ' + sizeText(upSlow) + ' GB) with real headroom to spare, so the bigger brain is a free download, not a purchase.', gain:'Expect smarter, steadier answers. Speed per word dips a little against a small brain — the trade is worth it when the memory is already there.', tab:'software' });
+          if (upSlow && upSlow < 70 && fit(upSlow, ram) === 'comfortable' && !oom){
+            push(anyway, { title:'Pull the next brain size up — a ' + upSlow + 'B', why:'Your ' + ram + ' GB of memory fits a ' + upSlow + 'B brain at Q4_K_M (about ' + sizeText(upSlow) + ' GB) with real headroom to spare, so the bigger brain is a download, not a purchase. Speed per word dips a little against a small brain — the trade is worth it when the memory is already there.', effort:'An evening', tab:'software' });
+            brainSizeAdvice = true;
           }
         }
       }
@@ -4614,72 +4823,56 @@
     if (hasFrust('dumb')){
       var target = cur != null ? nextUp(cur) : (ram >= 16 ? 14 : null);
       var dumbHandled = false;
-      if (target && ram && fit(target, ram) === 'comfortable'){
-        push(free, { title:'Pull a bigger brain — the ' + target + 'B class', why:'You flagged “Answers feel dumb”' + (cur ? ' running ' + brainName : '') + '. A ' + target + 'B brain at Q4_K_M takes about ' + sizeText(target) + ' GB — inside your ' + ram + ' GB with real headroom left for the system.', gain:'Expect visibly better reasoning and fewer silly misses. This is the single biggest free upgrade most stacks have waiting.', tab:'software' });
+      if (target && ram && fit(target, ram) === 'comfortable' && !brainSizeAdvice){
+        push(anyway, { title:'Pull a bigger brain — the ' + target + 'B class', why:'You flagged “Answers could be better”' + (cur ? ' running ' + brainName : '') + '. A ' + target + 'B brain at Q4_K_M takes about ' + sizeText(target) + ' GB — inside your ' + ram + ' GB with real headroom left for the system, and the reasoning visibly improves.', effort:'An evening', tab:'software' });
+        brainSizeAdvice = true;
         dumbHandled = true;
       }
       if (!dumbHandled){
-        push(free, { title:'Try a better-fit brain at the same size — and give it an easier job', why:'You flagged “Answers feel dumb”, but a bigger brain is not an honest fit here' + (ram && target ? ' — a ' + target + 'B takes about ' + sizeText(target) + ' GB against your ' + ram + ' GB' : '') + '. A different model family at the same size often answers better, and shorter context plus file search (so the brain reads instead of guessing) lifts quality for free.', gain:'Expect a modest but real lift — better fit and an easier job, not a new machine’s worth of smarts.', tab:'software' });
+        push(anyway, { title:'Try a better-fit brain at the same size — and let it read your files', why:'You flagged “Answers could be better”, but a bigger brain is not an honest fit here' + (ram && target ? ' — a ' + target + 'B takes about ' + sizeText(target) + ' GB against your ' + ram + ' GB' : '') + '. A different model family at the same size often answers better, and file search lifts quality too — the brain reads your documents instead of guessing.', effort:'An evening', tab:'software' });
         if (ram && target && fit(target, ram) !== 'comfortable'){
-          push(big, { title:'The honest fix is more memory', why:'Smarts scale with brain size, and brain size is capped by memory. While this machine’s memory is the cap, no download changes that.', gain:'Expect the next brain class up to become a comfortable fit — that is where the real quality jump lives.', tab:'hardware' });
+          push(anyway, { title:'The honest fix is more memory', why:'Smarts scale with brain size, and brain size is capped by memory. While this machine’s memory is the cap, no download changes that — more memory is what lets the next brain class up become a comfortable fit.', effort:'One purchase', tab:'hardware' });
         }
       }
     }
 
-    if (hasFrust('novoice') || !hasSoft('voice')){
-      push(free, { title:'Add voice — hear and be heard', why:(hasFrust('novoice') ? 'You flagged “No voice yet”. ' : 'Your software stack has no voice piece yet. ') + 'Build Plan phase 2 does it the offline way: faster-whisper listens, and Kokoro or Piper speaks — all on the machine.', gain:'Expect dictation in and spoken answers out, still with Wi-Fi off. An afternoon’s setup, no purchase.', tab:'plan' });
+    if (hasFrust('loud') || hasSit('quiet')){
+      push(anyway, { title:'Turn the power draw down in settings first', why:'You flagged ' + (hasFrust('loud') ? '“Too loud or hot”' : 'a setup that must stay quiet') + '. A smaller brain, or the same brain with a modest context, draws less power — and less power is less heat and less fan.', effort:'Ten minutes', tab:'power' });
+      push(anyway, { title:'A silent, low-power machine class', why:'If the noise has to go for good, the fanless mini / Apple silicon class runs big brains near-silently on a fraction of a desktop’s power draw.', effort:'One purchase', tab:'hardware', store:'macmini' });
     }
 
-    if (hasFrust('nofiles') || !hasSoft('rag')){
-      push(free, { title:'Turn on file search over your own folders', why:(hasFrust('nofiles') ? 'You flagged “Can’t search my files”. ' : 'Your software stack has no file search yet. ') + 'Add nomic-embed-text — under 1 GB, a utility, not a chat brain — and point file search at approved folders only.', gain:'Expect answers grounded in your own documents instead of general knowledge — often the upgrade people feel most, and it costs nothing.', tab:'software' });
-    }
-
-    if (hasFrust('loud') || hasSit('quiet') || hasSit('offgrid')){
-      push(free, { title:'Turn the power draw down in settings first', why:'You flagged ' + (hasFrust('loud') ? '“Too loud or hot”' : 'a quiet / off-grid setup') + '. A smaller brain, or the same brain with a modest context, draws less power — and less power is less heat and less fan.', gain:'Expect a calmer, cooler machine for short jobs. The limit is honest: heavy brains will still work the hardware hard.', tab:'power' });
-      if (hasFrust('loud') || hasSit('quiet')){
-        push(big, { title:'A silent, low-power machine class', why:'If the noise has to go for good, the fanless mini / Apple silicon class runs big brains near-silently on a fraction of a desktop’s power draw.', gain:'Expect near-silence and low tens of watts — a different daily experience, at a real purchase price.', tab:'hardware', store:'macmini' });
-      }
-    }
-
-    if (hasFrust('storage')){
-      push(free, { title:'Delete the brains you no longer run', why:'You flagged “Storage filling up”. Models are the usual space hogs — every brain you pulled to try once is still sitting on the disk at full size.', gain:'Expect gigabytes back in minutes, for $0. Keep the two or three brains you actually use.', tab:'software' });
-      push(cheap, { title:'Add a fast external SSD for the model shelf', why:'When the free clean-out is not enough, a portable SSD holds the brain library and your files, and moves between machines with you.', gain:'Expect the pressure gone and room to grow — brains load off the SSD while the internal disk breathes again. An internal NVMe upgrade is the other route, if your machine takes one.', store:'storage', store2:'nvme', tab:'hardware' });
-    }
-
-    if (hasFrust('fragile')){
-      push(free, { title:'Start the backup routine from the Build Plan', why:'You flagged “Setup feels fragile”. The Build Plan’s first backup step and the before-you-unplug checklist turn a setup you are afraid to touch into one you can rebuild.', gain:'Expect the fragility to mostly disappear: if anything breaks, you restore instead of starting over.', tab:'plan' });
-      push(cheap, { title:'Give the stack a dedicated backup drive', why:'A routine needs somewhere to land. A plain external drive that only holds backups — plugged in for the copy, unplugged the rest of the time — is the cheap version of safe.', gain:'Expect a cold copy that survives the machine itself failing. Cheap insurance, bought once.', store:'backup' });
-    }
-
-    if (!hasSoft('ollama')){
-      push(free, { title:'Add Ollama — the home base', why:'Your software stack is missing Ollama, the one home base every app and helper talks to in this guide’s architecture.', gain:'Expect the rest of the stack to get simpler: one place brains live, one place everything else plugs in.', tab:'overview' });
-    }
-    if (!hasSoft('openwebui')){
-      push(free, { title:'Add Open WebUI — the front door', why:'Your software stack is missing Open WebUI, the friendly chat window that sits on top of Ollama in this guide’s architecture.', gain:'Expect a proper chat page on your own machine instead of a bare terminal — same brains, kinder door.', tab:'software' });
+    if (storageFull){
+      push(anyway, { title:'Delete the brains you no longer run', why:'Your note mentions storage filling up. Models are the usual space hogs — every brain you pulled to try once is still sitting on the disk at full size. Keep the two or three you actually use.', effort:'Ten minutes', tab:'software' });
+      push(anyway, { title:'Add a fast external SSD for the model shelf', why:'When the clean-out is not enough, a portable SSD holds the brain library and your files, and moves between machines with you. An internal NVMe upgrade is the other route, if your machine takes one.', effort:'One purchase', store:'storage', store2:'nvme', tab:'hardware' });
     }
 
     if (hasSit('travels')){
-      push(free, { title:'Keep the whole stack on one portable machine', why:'You said the stack travels with you. One machine that holds the brains, voice, and files — no home server to miss on the road — is the setup that survives travel.', gain:'Expect the same stack in every place, with nothing to re-configure when you move.', tab:'hardware' });
+      push(anyway, { title:'Keep the whole stack on one portable machine', why:'You said the stack travels with you. One machine that holds the brains, voice, and files — no home server to miss on the road — is the setup that survives travel, the same in every place.', effort:'Ten minutes', tab:'hardware' });
     }
     if (hasSit('offgrid')){
-      push(free, { title:'Size your brains to the power budget', why:'You run off-grid / on battery. Brain size is power draw: the smaller the brain, the longer the bank lasts — the Power page works the hours out for your setup.', gain:'Expect predictable runtime instead of a battery surprise — pick the brain per job, biggest only when the sun is cooperating.', tab:'power' });
+      push(anyway, { title:'Size your brains to the power budget', why:'You run off-grid / on battery. Brain size is power draw: the smaller the brain, the longer the bank lasts — the Power page works the hours out for your setup, so runtime is predictable instead of a battery surprise.', effort:'Ten minutes', tab:'power' });
     }
 
-    if (healthy){
-      cheap = [];
-      big = [];
-      free = free.slice(0, 2);
+    // A stack that is already in good shape gets the verdict and
+    // polish only — never a project list.
+    if (verdict){
+      var budget = 2;
+      [local, open, secure, anyway].forEach(function(list){
+        if (list.length > budget) list.length = Math.max(budget, 0);
+        budget -= list.length;
+        if (budget < 0) budget = 0;
+      });
     }
 
     // ---- Render ----
     var html = '';
     if (ceiling){
-      html += '<div class="up-ceiling"><h3>This machine has hit its ceiling</h3><p>With ' + ram + ' GB of memory' + (cur && cur >= 32 ? ', a ' + cur + 'B-class brain — about ' + sizeText(cur) + ' GB before context — simply does not fit' : ', there is no room past an 8B-class brain') + '. No setting fixes memory: the honest move is a new-stack plan sized to what you actually want to run. The free wins below still apply to the machine you have.</p><div class="up-rec-btns" style="justify-content:center"><button type="button" data-up-bridge="1">See the new-stack plan →</button></div></div>';
-    } else if (healthy){
-      html += '<div class="up-verdict"><h3>Don\'t buy anything yet</h3><p>Your stack is healthy — Ollama and Open WebUI are in place' + (cur && ram ? ', and ' + brainName + ' (about ' + sizeText(cur) + ' GB) sits comfortably in your ' + ram + ' GB' : '') + '. The bottleneck isn’t hardware. Anything below is free polish, not a purchase.</p></div>';
+      html += '<div class="up-ceiling"><h3>This machine has hit its ceiling</h3><p>With ' + ram + ' GB of memory' + (cur && cur >= 32 ? ', a ' + cur + 'B-class brain — about ' + sizeText(cur) + ' GB before context — simply does not fit' : ', there is no room past an 8B-class brain') + '. No setting changes that: the machine itself is the limit, and the honest move is a new-stack plan sized to what you actually want to run. The steps below still apply to the machine you have.</p><div class="up-rec-btns" style="justify-content:flex-start"><button type="button" data-up-bridge="1">See the new-stack plan →</button></div></div>';
+    } else if (verdict){
+      html += '<div class="up-verdict"><h3>This is already in good shape</h3><p>Nothing in your setup needs the internet, the brain is an open-weight one you picked yourself, and the machine is not sitting online all day — which is the whole point of this guide, already true of your stack. Anything below is small polish, not a project.</p></div>';
     }
     function recHtml(rec){
-      var s = '<div class="up-rec"><h4>' + esc(rec.title) + '</h4><p>' + rec.why + '</p><p class="up-gain"><strong>Expected gain:</strong> ' + esc(rec.gain) + '</p>';
+      var s = '<div class="up-rec"><h4>' + esc(rec.title) + '</h4><p>' + rec.why + '</p><p class="up-gain"><strong>Effort:</strong> ' + esc(rec.effort) + '</p>';
       var btns = '';
       if (rec.tab) btns += '<button type="button" data-up-tab="' + rec.tab + '">' + esc(TAB_LABELS[rec.tab] || 'See the section →') + '</button>';
       if (rec.store) btns += '<button type="button" class="up-store-btn" data-up-store="' + rec.store + '">See it in the store →</button>';
@@ -4693,17 +4886,18 @@
       list.forEach(function(r){ s += recHtml(r); });
       return s + '</div>';
     }
-    html += bandHtml('Free wins', '$0 — settings and software, no shopping', free);
-    html += bandHtml('Cheap wins', 'Small purchases that earn their place', cheap);
-    html += bandHtml('Big wins', 'Major hardware — only when the free wins run out', big);
+    html += bandHtml('More local', 'Cut the cord — chat, voice, and files that never leave this machine.', local);
+    html += bandHtml('More open', 'Open-weight pieces you can inspect, keep, and never have taken away.', open);
+    html += bandHtml('More secure', 'Tighter settings and habits, so the stack stays yours alone.', secure);
+    html += bandHtml('Worth doing anyway', 'Comfort and upkeep — the fixes that make the stack nicer to live with.', anyway);
     if (!html){
-      html = '<div class="up-empty">Tell the guide a little more — a machine, a brain, or one frustration chip — and the ranking will build itself from what you enter.</div>';
+      html = '<div class="up-empty">Tell the guide a little more — a machine, a brain, or one frustration chip — and the ways to improve it will build themselves from what you enter.</div>';
     }
     if (b.frustrationText){
-      html += '<p class="shop-note">You also noted: “' + esc(b.frustrationText) + '” — if it maps to a chip above, tapping it sharpens the ranking.</p>';
+      html += '<p class="shop-note">You also noted: “' + esc(b.frustrationText) + '” — if it maps to a chip above, tapping it sharpens the list.</p>';
     }
     resultsEl.innerHTML = html;
-    if (upMsg) upMsg.textContent = 'Ranked — biggest win for the least effort first.';
+    if (upMsg) upMsg.textContent = 'Ways to improve it, grouped by goal — pick the ones that matter to you.';
     resultsEl.querySelectorAll('[data-up-tab]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var tab = btn.getAttribute('data-up-tab');
@@ -4714,6 +4908,7 @@
     resultsEl.querySelectorAll('[data-up-store]').forEach(function(btn){
       btn.addEventListener('click', function(){
         var name = STORE_MAP[btn.getAttribute('data-up-store')];
+        closeUpgrade();
         if (name) tickInStore(name);
       });
     });
@@ -4723,11 +4918,27 @@
         if (window.__openStackIntake) window.__openStackIntake();
       });
     });
-    try { resultsEl.scrollIntoView({ behavior:'smooth', block:'nearest' }); } catch(e){}
+    showResultsState();
+    try { window.scrollTo({ top:0, behavior:'smooth' }); } catch(e){ window.scrollTo(0, 0); }
   }
+
   form.addEventListener('submit', function(e){ e.preventDefault(); runUpgrade(); });
   var runBtn = $('upRun');
   if (runBtn) runBtn.addEventListener('click', function(e){ e.preventDefault(); runUpgrade(); });
+})();
+</script>
+<script>
+(function(){
+  // Store door to the upgrade path. The #upgrade panel lives in the
+  // homepage hero, which is hidden whenever a topic tab is showing —
+  // so mirror the intake's tab-switch in reverse: leave the topic view
+  // first (the header Home icon's own showHome path), then open it.
+  var btn = document.getElementById('shopUpgradeBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    if (document.body.classList.contains('topic-view') && typeof window.__showRoadmapHome === 'function') window.__showRoadmapHome();
+    if (typeof window.__openStackUpgrade === 'function') window.__openStackUpgrade();
+  });
 })();
 </script>
 <script>
