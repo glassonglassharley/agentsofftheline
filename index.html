@@ -1389,6 +1389,64 @@
     .ody-panel{padding:16px}
     .ody-link{width:100%;justify-content:center}
   }
+  /* ============================================================
+     UPGRADE WHAT I ALREADY HAVE — the second path, beside the
+     new-stack intake. The homepage teaser becomes a two-card
+     fork (Plan a new stack / Upgrade what I already have), and
+     the upgrade panel mirrors the intake's open/close shell,
+     form, and chip styles. Everything runs on this page.
+     ============================================================ */
+  .intake-teaser{max-width:880px}
+  .fork-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;align-items:stretch}
+  .fork-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px;box-shadow:var(--shadow)}
+  .fork-card h3{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:-.01em;margin:0;text-align:center}
+  .fork-card p{margin:0;color:var(--ink2);font-size:13.5px;line-height:1.55;text-align:center}
+  .fork-card .intake-teaser-btn{margin-top:auto;font-size:15.5px;padding:12px 22px;min-height:50px;white-space:normal}
+  @media (max-width:640px){ .fork-grid{grid-template-columns:1fr} .fork-card .intake-teaser-btn{width:100%} }
+
+  #upgrade{display:none}
+  .hero #upgrade{padding-top:0;padding-bottom:0}
+  #upgrade.open{display:block;position:static;width:min(880px,100%);max-width:100%;margin:0 auto 18px;max-height:none;overflow:visible;background:var(--bg);border:1.5px solid var(--line-strong);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px 20px;text-align:left}
+  #upgrade .wrap{max-width:none;margin:0;padding:0}
+  #upgrade .sec-head{margin-bottom:14px}
+  #upgrade .sec-head::after{display:none}
+  #upgrade .intake-close{float:right;font-family:system-ui,sans-serif;font-weight:700;font-size:13px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line-strong);border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer}
+  #upgrade .intake-close:hover{border-color:var(--amber);color:var(--amber)}
+  @media (max-width:640px){ #upgrade.open{width:100%;padding:18px 14px 16px} }
+  .up-privacy{margin:0 auto 14px;max-width:64ch;text-align:center;color:var(--ink2);font-size:13.5px;line-height:1.55}
+  .up-saved-note{margin:0 auto 12px;max-width:64ch;text-align:center;background:var(--teal-soft);border:1px solid var(--teal);border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--ink2)}
+  .up-saved-note[hidden]{display:none}
+  .upgrade-form input[type="text"]{width:100%;font:inherit;font-family:system-ui,sans-serif;font-size:14px;padding:10px;border-radius:9px;border:1.5px solid var(--line-strong);background:var(--surface);color:var(--ink);text-align:left}
+  @media (max-width:640px){ .upgrade-form input[type="text"]{font-size:16px;min-height:48px} }
+  .up-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:640px;margin:0 auto}
+  .intake-q label.up-chip{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:0;font-family:system-ui,sans-serif;font-weight:600;font-size:13.5px;padding:9px 14px;min-height:44px;border:1.5px solid var(--line-strong);border-radius:999px;background:var(--surface2);color:var(--ink2);cursor:pointer;max-width:none;margin:0;text-align:center}
+  .intake-q label.up-chip:hover{border-color:var(--amber);color:var(--amber)}
+  .up-chip input[type="checkbox"]{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+  .up-chip:has(input:checked){background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .up-chip:has(input:focus-visible){outline:3px solid var(--teal);outline-offset:2px}
+  .up-save-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin-top:16px}
+  #upResults{margin-top:6px}
+  #upResults:empty{display:none}
+  .up-verdict{margin-top:18px;background:var(--teal-soft);border:1.5px solid var(--teal);border-radius:var(--radius);padding:18px;text-align:center}
+  .up-verdict h3{margin:0 0 6px;font-size:16.5px;font-weight:800;color:var(--teal)}
+  .up-verdict p{margin:0 auto;color:var(--ink2);font-size:14px;max-width:64ch}
+  .up-ceiling{margin-top:18px;background:var(--rust-soft);border:1.5px solid var(--rust);border-radius:var(--radius);padding:18px;text-align:center}
+  .up-ceiling h3{margin:0 0 6px;font-size:16.5px;font-weight:800;color:var(--rust)}
+  .up-ceiling p{margin:0 auto 12px;color:var(--ink2);font-size:14px;max-width:64ch}
+  .up-band{margin-top:20px}
+  .up-band>h3{font-family:var(--serif);font-weight:700;font-size:19px;margin:0 0 4px;text-align:center}
+  .up-band>.up-band-sub{margin:0 auto 12px;text-align:center;color:var(--muted);font-size:13px}
+  .up-rec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:0 auto 10px;max-width:760px;text-align:left}
+  .up-rec h4{margin:0 0 5px;font-size:15px;font-weight:700;text-align:left}
+  .up-rec p{margin:0 0 6px;color:var(--ink2);font-size:13.5px;line-height:1.55;text-align:left}
+  .up-rec p.up-gain{color:var(--ink)}
+  .up-rec p.up-gain strong{color:var(--amber)}
+  .up-rec-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .up-rec-btns button{font-family:system-ui,sans-serif;font-weight:700;font-size:13px;border-radius:999px;padding:9px 14px;min-height:42px;cursor:pointer;border:1.5px solid var(--line-strong);background:var(--surface2);color:var(--ink)}
+  .up-rec-btns button:hover{border-color:var(--amber);color:var(--amber)}
+  .up-rec-btns button.up-store-btn{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .up-rec-btns button.up-store-btn:hover{background:var(--amber);color:#fff;border-color:var(--amber)}
+  .up-empty{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;text-align:center;color:var(--ink2);font-size:14px}
 </style>
 <!-- PWA -->
 <link rel="manifest" href="/manifest.webmanifest" />
@@ -1590,6 +1648,102 @@
     </div>
   </div>
 </section>
+<section id="upgrade" aria-label="Upgrade what I already have"><div class="wrap">
+  <div class="sec-head"><button type="button" class="intake-close" id="upgradeClose">Close ✕</button><span class="tag">Upgrade your stack</span><h2>Make the stack you own better</h2><p>Tell the guide what you already run, and get ranked fixes — biggest win for the least effort first. Anything worth buying gets ticked for you in the Shopping List.</p></div>
+  <p class="up-privacy">Your answers never leave this device — no account, no server, nothing sent anywhere.</p>
+  <p class="up-saved-note" id="upSavedNote" hidden>Your build was restored — it is saved on this device only.</p>
+  <form class="intake-form upgrade-form" id="upgradeForm">
+    <div class="intake-grid">
+      <div class="intake-q">
+        <span class="q-label" id="qUpMachine">Your machine</span>
+        <p class="q-hint">The computer the stack runs on, as you would describe it.</p>
+        <input type="text" id="upMachine" aria-labelledby="qUpMachine" placeholder="Mac mini M4, old gaming PC, Raspberry Pi 5" autocomplete="off" />
+      </div>
+      <div class="intake-q">
+        <span class="q-label" id="qUpRam">Memory (RAM)</span>
+        <p class="q-hint">Memory is the ceiling for brain size — pick the closest if you know it.</p>
+        <select id="upRam" aria-labelledby="qUpRam">
+          <option value="" selected>Not sure</option>
+          <option value="8">8 GB</option>
+          <option value="16">16 GB</option>
+          <option value="24">24 GB</option>
+          <option value="32">32 GB</option>
+          <option value="64">64 GB</option>
+          <option value="96">96 GB</option>
+          <option value="128">128 GB</option>
+        </select>
+      </div>
+      <div class="intake-q">
+        <span class="q-label" id="qUpGpu">Graphics (GPU)</span>
+        <p class="q-hint">A graphics card, Apple built-in graphics, or none — whatever you have.</p>
+        <input type="text" id="upGpu" aria-labelledby="qUpGpu" placeholder="Apple built-in, RTX 3060, none / not sure" autocomplete="off" />
+      </div>
+      <div class="intake-q">
+        <span class="q-label" id="qUpBrains">Brains running now</span>
+        <p class="q-hint">The model name and size you run today, if any.</p>
+        <input type="text" id="upBrains" aria-labelledby="qUpBrains" placeholder="llama 3.1 8b" autocomplete="off" />
+      </div>
+      <fieldset class="intake-q">
+        <legend>Software stack</legend>
+        <p class="q-hint">What is already installed and working?</p>
+        <label><input type="checkbox" name="upSoftware" value="ollama" /> Ollama</label>
+        <label><input type="checkbox" name="upSoftware" value="openwebui" /> Open WebUI</label>
+        <label><input type="checkbox" name="upSoftware" value="voice" /> Voice — whisper etc.</label>
+        <label><input type="checkbox" name="upSoftware" value="rag" /> File search / RAG</label>
+        <label><input type="checkbox" name="upSoftware" value="helpers" /> Helpers / agents</label>
+        <label><input type="checkbox" name="upSoftware" value="none" /> None yet</label>
+      </fieldset>
+      <fieldset class="intake-q">
+        <legend>Your situation</legend>
+        <p class="q-hint">How and where the machine lives.</p>
+        <label><input type="checkbox" name="upSituation" value="allday" /> Runs all day</label>
+        <label><input type="checkbox" name="upSituation" value="quiet" /> Must stay quiet</label>
+        <label><input type="checkbox" name="upSituation" value="travels" /> Travels with me</label>
+        <label><input type="checkbox" name="upSituation" value="offgrid" /> Off-grid / battery</label>
+      </fieldset>
+      <div class="intake-q">
+        <span class="q-label" id="qUpWorking">What's working</span>
+        <p class="q-hint">Optional — what already feels right, so the fixes leave it alone.</p>
+        <input type="text" id="upWorking" aria-labelledby="qUpWorking" placeholder="e.g. chat feels instant, voice works well" autocomplete="off" />
+      </div>
+      <div class="intake-q">
+        <span class="q-label" id="qUpFrustrationText">Anything else frustrating?</span>
+        <p class="q-hint">Optional — in your own words, if the chips below miss it.</p>
+        <input type="text" id="upFrustrationText" aria-labelledby="qUpFrustrationText" placeholder="e.g. fans spin up every evening" autocomplete="off" />
+      </div>
+    </div>
+    <fieldset class="intake-q" style="margin-top:20px">
+      <legend>What's frustrating?</legend>
+      <p class="q-hint">This is the key question — tap everything that sounds familiar. The ranking is built from these.</p>
+      <div class="up-chips">
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="slow" /><span>Too slow</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="dumb" /><span>Answers feel dumb</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="oom" /><span>Runs out of memory or crashes</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="loud" /><span>Too loud or hot</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="novoice" /><span>No voice yet</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="nofiles" /><span>Can't search my files</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="storage" /><span>Storage filling up</span></label>
+        <label class="up-chip"><input type="checkbox" name="upFrustration" class="upFrustration" value="fragile" /><span>Setup feels fragile</span></label>
+      </div>
+    </fieldset>
+    <div class="intake-actions">
+      <button class="btn primary" id="upRun" type="submit" style="background:var(--amber-bright);color:#1c1305">Rank my upgrades →</button>
+      <span class="btn-msg" id="upMsg" role="status" style="color:var(--amber)"></span>
+    </div>
+  </form>
+  <div class="up-save-actions">
+    <button class="btn" id="upDownload" type="button" style="background:transparent;border:1.5px solid var(--line-strong);color:var(--ink2)">Download my build</button>
+    <button class="btn" id="upLoad" type="button" style="background:transparent;border:1.5px solid var(--line-strong);color:var(--ink2)">Load a build file</button>
+    <input type="file" id="upLoadFile" accept=".json" hidden />
+    <button class="btn" id="upForget" type="button" style="background:transparent;border:1.5px solid var(--line-strong);color:var(--ink2)">Forget my build</button>
+  </div>
+  <div class="up-save-actions" id="upForgetConfirm" hidden>
+    <span style="font-size:13.5px;color:var(--ink2)">Forget the build saved on this device?</span>
+    <button class="btn" id="upForgetYes" type="button" style="background:var(--rust);border:1.5px solid var(--rust);color:#fff">Yes, forget it</button>
+    <button class="btn" id="upForgetNo" type="button" style="background:transparent;border:1.5px solid var(--line-strong);color:var(--ink2)">Keep my build</button>
+  </div>
+  <div id="upResults" aria-live="polite"></div>
+</div></section>
     <div id="masthead">
     <h1>Your personal agent, running on your machine — <em>with the internet unplugged</em></h1>
     <p class="byline"><span>An offline guide for anyone</span></p>
@@ -1604,7 +1758,18 @@
       </figure>
         <div style="text-align:center;margin-top:10px"><span class="pwa-badge" id="pwaBadge" role="status" aria-live="polite" hidden></span></div>
       <div class="intake-teaser" id="intakeTeaser">
-        <button type="button" class="intake-teaser-btn" id="intakeTeaserBtn">Start Here →</button>
+        <div class="fork-grid">
+          <div class="fork-card">
+            <h3>Plan a new stack</h3>
+            <p>Starting from scratch? Walk the guide from the top — the stack, the hardware, and a personal plan built from a few quick questions.</p>
+            <button type="button" class="intake-teaser-btn" id="intakeTeaserBtn">Start Here →</button>
+          </div>
+          <div class="fork-card">
+            <h3>Make the stack you own better</h3>
+            <p>Already running something? Tell the guide what you have, and get your fixes ranked — biggest win for the least effort first.</p>
+            <button type="button" class="intake-teaser-btn" id="upgradeTeaserBtn">Rank my upgrades →</button>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -4158,6 +4323,411 @@
       }, 2000);
     });
   });
+})();
+</script>
+<script>
+(function(){
+  // ============================================================
+  // UPGRADE WHAT I ALREADY HAVE — the second path. Rule-based,
+  // fully on this page: no network, no libraries, nothing typed
+  // here leaves the device. The build auto-saves to localStorage
+  // on this device only, and can be downloaded / loaded as a
+  // JSON file the visitor keeps.
+  // ============================================================
+  var upgradeSection = document.getElementById('upgrade');
+  var intakeSection = document.getElementById('intake');
+  var form = document.getElementById('upgradeForm');
+  if (!upgradeSection || !form) return;
+  var resultsEl = document.getElementById('upResults');
+  var savedNote = document.getElementById('upSavedNote');
+  var upMsg = document.getElementById('upMsg');
+  var STORE_KEY = 'oas-upgrade-build-v1';
+  var STORE_MAP = {
+    storage: 'Samsung T7 Shield 2TB portable SSD',
+    nvme: 'Internal NVMe SSD upgrade',
+    backup: 'Cold backup hard drive',
+    macmini: 'Apple Mac mini M5 Pro 64GB'
+  };
+  var TAB_LABELS = {
+    software: 'See Software & Brains →',
+    plan: 'See the Build Plan →',
+    hardware: 'See Hardware →',
+    power: 'See Power →',
+    overview: 'See The Stack →',
+    shop: 'See the Shopping List →'
+  };
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function checkedValues(name){
+    var out = [];
+    form.querySelectorAll('input[name="' + name + '"]').forEach(function(c){ if (c.checked) out.push(c.value); });
+    return out;
+  }
+  function setChecked(name, values){
+    form.querySelectorAll('input[name="' + name + '"]').forEach(function(c){ c.checked = values.indexOf(c.value) >= 0; });
+  }
+
+  // ---- Open / close, mirroring the intake's mechanics ----
+  function closeUpgrade(){
+    upgradeSection.classList.remove('open');
+    var b = $('upgradeTeaserBtn'); if (b) b.setAttribute('aria-expanded','false');
+  }
+  function openUpgrade(){
+    // Only one of intake / upgrade open at a time
+    if (intakeSection){ intakeSection.classList.remove('open'); intakeSection.classList.remove('home-on'); }
+    var hib = $('headerIntakeBtn'); if (hib) hib.setAttribute('aria-expanded','false');
+    upgradeSection.classList.add('open');
+    var b = $('upgradeTeaserBtn'); if (b) b.setAttribute('aria-expanded','true');
+    setTimeout(function(){ try { upgradeSection.scrollIntoView({ behavior:'smooth', block:'start' }); } catch(e){} }, 40);
+    var c = $('upgradeClose'); if (c) { try { c.focus(); } catch(e){} }
+  }
+  window.__openStackUpgrade = openUpgrade;
+  window.__closeStackUpgrade = closeUpgrade;
+  var teaserBtn = $('upgradeTeaserBtn');
+  if (teaserBtn) teaserBtn.addEventListener('click', function(){ openUpgrade(); });
+  var closeBtn = $('upgradeClose');
+  if (closeBtn) closeBtn.addEventListener('click', function(){ closeUpgrade(); if (teaserBtn) { try { teaserBtn.focus(); } catch(e){} } });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && upgradeSection.classList.contains('open')) closeUpgrade(); });
+  // Opening the intake closes the upgrade panel (and the other way
+  // round is handled in openUpgrade above)
+  if (typeof window.__openStackIntake === 'function'){
+    var origOpenIntake = window.__openStackIntake;
+    window.__openStackIntake = function(){ closeUpgrade(); return origOpenIntake.apply(this, arguments); };
+  }
+  if (intakeSection && typeof MutationObserver !== 'undefined'){
+    try {
+      new MutationObserver(function(){
+        if (intakeSection.classList.contains('open')) closeUpgrade();
+      }).observe(intakeSection, { attributes:true, attributeFilter:['class'] });
+    } catch(e){}
+  }
+
+  // ---- Size facts (the guide's own numbers) ----
+  // 3B ≈ 2 GB · 8B Q4 ≈ 4.7 GB · 14B Q4 ≈ 9 GB · 32B Q4 ≈ 19–20 GB ·
+  // 70B needs a 128 GB-class machine. Q4_K_M is the sweet-spot quant.
+  var LADDER = [3, 8, 14, 32, 70];
+  function sizeGB(params){
+    if (params == null) return null;
+    if (params <= 4) return 2;
+    if (params <= 9) return 4.7;
+    if (params <= 16) return 9;
+    if (params <= 34) return 19.5;
+    return 41;
+  }
+  function sizeText(params){
+    if (params === 32) return '19–20';
+    var g = sizeGB(params);
+    return g == null ? '' : String(g);
+  }
+  function fit(params, ram){
+    if (!ram || params == null) return null;
+    var ratio = sizeGB(params) / ram;
+    if (ratio <= 0.60) return 'comfortable';
+    if (ratio <= 0.85) return 'tight';
+    return 'no';
+  }
+  function nextUp(cur){
+    for (var i = 0; i < LADDER.length; i++){ if (LADDER[i] > cur) return LADDER[i]; }
+    return null;
+  }
+  function prevDown(cur){
+    var out = null;
+    for (var i = 0; i < LADDER.length; i++){ if (LADDER[i] < cur) out = LADDER[i]; }
+    return out;
+  }
+  function parseBrainParams(text){
+    if (!text) return null;
+    var m = String(text).toLowerCase().match(/(\d+(?:\.\d+)?)\s*b\b/);
+    if (!m) return null;
+    var n = parseFloat(m[1]);
+    return isNaN(n) ? null : n;
+  }
+
+  function collectBuild(){
+    return {
+      machine: $('upMachine').value,
+      ram: $('upRam').value,
+      gpu: $('upGpu').value,
+      brains: $('upBrains').value,
+      software: checkedValues('upSoftware'),
+      situation: checkedValues('upSituation'),
+      working: $('upWorking').value,
+      frustrations: checkedValues('upFrustration'),
+      frustrationText: $('upFrustrationText').value
+    };
+  }
+  function applyBuild(d){
+    if (!d) return;
+    if (typeof d.machine === 'string') $('upMachine').value = d.machine;
+    if (typeof d.ram === 'string' || typeof d.ram === 'number') $('upRam').value = String(d.ram);
+    if (typeof d.gpu === 'string') $('upGpu').value = d.gpu;
+    if (typeof d.brains === 'string') $('upBrains').value = d.brains;
+    if (Object.prototype.toString.call(d.software) === '[object Array]') setChecked('upSoftware', d.software);
+    if (Object.prototype.toString.call(d.situation) === '[object Array]') setChecked('upSituation', d.situation);
+    if (typeof d.working === 'string') $('upWorking').value = d.working;
+    if (Object.prototype.toString.call(d.frustrations) === '[object Array]') setChecked('upFrustration', d.frustrations);
+    if (typeof d.frustrationText === 'string') $('upFrustrationText').value = d.frustrationText;
+  }
+  function saveBuild(){
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(collectBuild())); } catch(e){}
+  }
+  form.addEventListener('change', saveBuild);
+  form.addEventListener('input', saveBuild);
+  // Restore a saved build on this device, if there is one
+  try {
+    var savedRaw = localStorage.getItem(STORE_KEY);
+    if (savedRaw){
+      applyBuild(JSON.parse(savedRaw));
+      if (savedNote) savedNote.hidden = false;
+    }
+  } catch(e){}
+
+  $('upDownload').addEventListener('click', function(){
+    var blob = new Blob([JSON.stringify(collectBuild(), null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'my-build.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ try { URL.revokeObjectURL(url); } catch(e){} }, 100);
+  });
+  var loadFile = $('upLoadFile');
+  $('upLoad').addEventListener('click', function(){ loadFile.click(); });
+  loadFile.addEventListener('change', function(){
+    var f = loadFile.files && loadFile.files[0];
+    loadFile.value = '';
+    if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      try {
+        var d = JSON.parse(String(reader.result || ''));
+        applyBuild(d);
+        saveBuild();
+        if (savedNote) savedNote.hidden = false;
+        if (upMsg) upMsg.textContent = 'Build loaded — saved on this device.';
+      } catch(e){
+        resultsEl.innerHTML = '<div class="up-empty">That file could not be read as a build file — nothing was changed. Pick a file saved with “Download my build”.</div>';
+      }
+    };
+    reader.onerror = function(){
+      resultsEl.innerHTML = '<div class="up-empty">That file could not be read — nothing was changed.</div>';
+    };
+    reader.readAsText(f);
+  });
+  var forgetConfirm = $('upForgetConfirm');
+  $('upForget').addEventListener('click', function(){
+    if (forgetConfirm) forgetConfirm.hidden = false;
+  });
+  if ($('upForgetNo')) $('upForgetNo').addEventListener('click', function(){
+    if (forgetConfirm) forgetConfirm.hidden = true;
+  });
+  if ($('upForgetYes')) $('upForgetYes').addEventListener('click', function(){
+    try { localStorage.removeItem(STORE_KEY); } catch(e){}
+    form.reset();
+    resultsEl.innerHTML = '';
+    if (savedNote) savedNote.hidden = true;
+    if (upMsg) upMsg.textContent = '';
+    if (forgetConfirm) forgetConfirm.hidden = true;
+  });
+
+  // ---- Store actions: the example-build pattern, exactly ----
+  function tickInStore(name){
+    if (window.__activateRoadmapTab) window.__activateRoadmapTab('shop');
+    var allFilter = document.querySelector('.store-filter[data-filter="all"]');
+    if (allFilter) allFilter.click();
+    var box = null;
+    document.querySelectorAll('.shop-check').forEach(function(c){
+      if (!box && c.getAttribute('data-name') === name) box = c;
+    });
+    if (!box) return;
+    if (!box.checked){
+      box.checked = true;
+      box.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    var card = box.closest ? box.closest('.shop-item') : null;
+    if (card){
+      try { card.scrollIntoView({ behavior:'smooth', block:'center' }); } catch(e){}
+      card.classList.add('build-flash');
+      setTimeout(function(){ card.classList.remove('build-flash'); }, 2000);
+    }
+  }
+
+  // ---- The recommendation engine ----
+  function runUpgrade(){
+    var b = collectBuild();
+    var machine = (b.machine || '').toLowerCase();
+    var brainsText = (b.brains || '').toLowerCase();
+    var ram = parseInt(b.ram, 10); if (isNaN(ram)) ram = 0;
+    var cur = parseBrainParams(b.brains);
+    var frust = b.frustrations;
+    var software = b.software;
+    var situation = b.situation;
+    function hasFrust(v){ return frust.indexOf(v) >= 0; }
+    function hasSoft(v){ return software.indexOf(v) >= 0; }
+    function hasSit(v){ return situation.indexOf(v) >= 0; }
+    var isPi = machine.indexOf('raspberry') >= 0 || /(^|[^a-z])pi([^a-z]|$)/.test(machine);
+    var brainName = b.brains ? esc(b.brains) : 'your current brain';
+    var machineName = b.machine ? esc(b.machine) : 'this machine';
+
+    var healthy = frust.length === 0 && hasSoft('ollama') && hasSoft('openwebui') &&
+      (!ram || !cur || fit(cur, ram) === 'comfortable');
+    var ceiling = !!ram && ram <= 8 && (
+      (cur != null && cur >= 32) ||
+      ((hasFrust('dumb') || hasFrust('slow')) && cur != null && cur >= 8)
+    );
+
+    var free = [], cheap = [], big = [];
+    var pushedTitles = {};
+    function push(list, rec){
+      if (pushedTitles[rec.title]) return;
+      pushedTitles[rec.title] = true;
+      list.push(rec);
+    }
+
+    if (hasFrust('oom')){
+      var down = cur != null ? prevDown(cur) : null;
+      var oomWhy = 'You flagged running out of memory' + (cur ? ', and ' + brainName + ' at Q4 takes about ' + sizeText(cur) + ' GB before it even starts thinking' : '') + (ram ? ' — on ' + ram + ' GB of memory there is no slack left for the system itself.' : '.');
+      var oomGain = down
+        ? 'Stepping down to a ' + down + 'B brain at Q4_K_M (about ' + sizeText(down) + ' GB) frees real headroom — expect the crashes to stop, at a small cost in smarts.'
+        : 'Running the Q4_K_M quant — the sweet-spot quant in this guide — is the smallest honest size for a brain. Expect the crashes to stop, at a small cost in top-end smarts.';
+      push(free, { title:'Step down to Q4_K_M — or one brain size smaller', why:oomWhy, gain:oomGain, tab:'software' });
+    }
+
+    if (hasFrust('slow')){
+      if (isPi){
+        push(free, { title:'Tune around the Pi’s honest speed', why:'You flagged “Too slow” on ' + machineName + '. Plainly: the Pi is a starter brain — a few tokens a second is its nature, not a fault in your setup. Settings still help at the edges: close everything else, keep the context modest, and let it do short jobs and helper work.', gain:'Expect a small lift from tidier settings — not a transformation. A few tokens a second is what a Pi gives, and for short questions and always-on helper jobs that is genuinely enough.', tab:'software' });
+        push(big, { title:'The real speed jump is a bigger machine', why:'No setting changes what a Pi is. If you want live, natural chat, the honest step is a machine with real memory — the Pi stays useful afterwards as the always-on helper.', gain:'A mid-size machine runs brains at a comfortable reading pace and faster — the difference is night and day next to a few tokens a second.', tab:'hardware' });
+      } else {
+        push(free, { title:'Right-size the job before buying anything', why:'You flagged “Too slow”' + (cur ? ' running ' + brainName : '') + '. The usual causes are free to fix: other apps eating memory, a context window far bigger than the conversation needs, or a quant heavier than Q4_K_M.', gain:'Expect a noticeable lift from closing rivals and keeping context modest — often the difference between laggy and usable, for $0.', tab:'software' });
+        if (cur != null && cur <= 8 && ram){
+          var upSlow = nextUp(cur);
+          if (upSlow && upSlow < 70 && fit(upSlow, ram) === 'comfortable' && !hasFrust('oom')){
+            push(free, { title:'Pull the next brain size up — a ' + upSlow + 'B', why:'Your ' + ram + ' GB of memory fits a ' + upSlow + 'B brain at Q4_K_M (about ' + sizeText(upSlow) + ' GB) with real headroom to spare, so the bigger brain is a free download, not a purchase.', gain:'Expect smarter, steadier answers. Speed per word dips a little against a small brain — the trade is worth it when the memory is already there.', tab:'software' });
+          }
+        }
+      }
+    }
+
+    if (hasFrust('dumb')){
+      var target = cur != null ? nextUp(cur) : (ram >= 16 ? 14 : null);
+      var dumbHandled = false;
+      if (target && ram && fit(target, ram) === 'comfortable'){
+        push(free, { title:'Pull a bigger brain — the ' + target + 'B class', why:'You flagged “Answers feel dumb”' + (cur ? ' running ' + brainName : '') + '. A ' + target + 'B brain at Q4_K_M takes about ' + sizeText(target) + ' GB — inside your ' + ram + ' GB with real headroom left for the system.', gain:'Expect visibly better reasoning and fewer silly misses. This is the single biggest free upgrade most stacks have waiting.', tab:'software' });
+        dumbHandled = true;
+      }
+      if (!dumbHandled){
+        push(free, { title:'Try a better-fit brain at the same size — and give it an easier job', why:'You flagged “Answers feel dumb”, but a bigger brain is not an honest fit here' + (ram && target ? ' — a ' + target + 'B takes about ' + sizeText(target) + ' GB against your ' + ram + ' GB' : '') + '. A different model family at the same size often answers better, and shorter context plus file search (so the brain reads instead of guessing) lifts quality for free.', gain:'Expect a modest but real lift — better fit and an easier job, not a new machine’s worth of smarts.', tab:'software' });
+        if (ram && target && fit(target, ram) !== 'comfortable'){
+          push(big, { title:'The honest fix is more memory', why:'Smarts scale with brain size, and brain size is capped by memory. While this machine’s memory is the cap, no download changes that.', gain:'Expect the next brain class up to become a comfortable fit — that is where the real quality jump lives.', tab:'hardware' });
+        }
+      }
+    }
+
+    if (hasFrust('novoice') || !hasSoft('voice')){
+      push(free, { title:'Add voice — hear and be heard', why:(hasFrust('novoice') ? 'You flagged “No voice yet”. ' : 'Your software stack has no voice piece yet. ') + 'Build Plan phase 2 does it the offline way: faster-whisper listens, and Kokoro or Piper speaks — all on the machine.', gain:'Expect dictation in and spoken answers out, still with Wi-Fi off. An afternoon’s setup, no purchase.', tab:'plan' });
+    }
+
+    if (hasFrust('nofiles') || !hasSoft('rag')){
+      push(free, { title:'Turn on file search over your own folders', why:(hasFrust('nofiles') ? 'You flagged “Can’t search my files”. ' : 'Your software stack has no file search yet. ') + 'Add nomic-embed-text — under 1 GB, a utility, not a chat brain — and point file search at approved folders only.', gain:'Expect answers grounded in your own documents instead of general knowledge — often the upgrade people feel most, and it costs nothing.', tab:'software' });
+    }
+
+    if (hasFrust('loud') || hasSit('quiet') || hasSit('offgrid')){
+      push(free, { title:'Turn the power draw down in settings first', why:'You flagged ' + (hasFrust('loud') ? '“Too loud or hot”' : 'a quiet / off-grid setup') + '. A smaller brain, or the same brain with a modest context, draws less power — and less power is less heat and less fan.', gain:'Expect a calmer, cooler machine for short jobs. The limit is honest: heavy brains will still work the hardware hard.', tab:'power' });
+      if (hasFrust('loud') || hasSit('quiet')){
+        push(big, { title:'A silent, low-power machine class', why:'If the noise has to go for good, the fanless mini / Apple silicon class runs big brains near-silently on a fraction of a desktop’s power draw.', gain:'Expect near-silence and low tens of watts — a different daily experience, at a real purchase price.', tab:'hardware', store:'macmini' });
+      }
+    }
+
+    if (hasFrust('storage')){
+      push(free, { title:'Delete the brains you no longer run', why:'You flagged “Storage filling up”. Models are the usual space hogs — every brain you pulled to try once is still sitting on the disk at full size.', gain:'Expect gigabytes back in minutes, for $0. Keep the two or three brains you actually use.', tab:'software' });
+      push(cheap, { title:'Add a fast external SSD for the model shelf', why:'When the free clean-out is not enough, a portable SSD holds the brain library and your files, and moves between machines with you.', gain:'Expect the pressure gone and room to grow — brains load off the SSD while the internal disk breathes again. An internal NVMe upgrade is the other route, if your machine takes one.', store:'storage', store2:'nvme', tab:'hardware' });
+    }
+
+    if (hasFrust('fragile')){
+      push(free, { title:'Start the backup routine from the Build Plan', why:'You flagged “Setup feels fragile”. The Build Plan’s first backup step and the before-you-unplug checklist turn a setup you are afraid to touch into one you can rebuild.', gain:'Expect the fragility to mostly disappear: if anything breaks, you restore instead of starting over.', tab:'plan' });
+      push(cheap, { title:'Give the stack a dedicated backup drive', why:'A routine needs somewhere to land. A plain external drive that only holds backups — plugged in for the copy, unplugged the rest of the time — is the cheap version of safe.', gain:'Expect a cold copy that survives the machine itself failing. Cheap insurance, bought once.', store:'backup' });
+    }
+
+    if (!hasSoft('ollama')){
+      push(free, { title:'Add Ollama — the home base', why:'Your software stack is missing Ollama, the one home base every app and helper talks to in this guide’s architecture.', gain:'Expect the rest of the stack to get simpler: one place brains live, one place everything else plugs in.', tab:'overview' });
+    }
+    if (!hasSoft('openwebui')){
+      push(free, { title:'Add Open WebUI — the front door', why:'Your software stack is missing Open WebUI, the friendly chat window that sits on top of Ollama in this guide’s architecture.', gain:'Expect a proper chat page on your own machine instead of a bare terminal — same brains, kinder door.', tab:'software' });
+    }
+
+    if (hasSit('travels')){
+      push(free, { title:'Keep the whole stack on one portable machine', why:'You said the stack travels with you. One machine that holds the brains, voice, and files — no home server to miss on the road — is the setup that survives travel.', gain:'Expect the same stack in every place, with nothing to re-configure when you move.', tab:'hardware' });
+    }
+    if (hasSit('offgrid')){
+      push(free, { title:'Size your brains to the power budget', why:'You run off-grid / on battery. Brain size is power draw: the smaller the brain, the longer the bank lasts — the Power page works the hours out for your setup.', gain:'Expect predictable runtime instead of a battery surprise — pick the brain per job, biggest only when the sun is cooperating.', tab:'power' });
+    }
+
+    if (healthy){
+      cheap = [];
+      big = [];
+      free = free.slice(0, 2);
+    }
+
+    // ---- Render ----
+    var html = '';
+    if (ceiling){
+      html += '<div class="up-ceiling"><h3>This machine has hit its ceiling</h3><p>With ' + ram + ' GB of memory' + (cur && cur >= 32 ? ', a ' + cur + 'B-class brain — about ' + sizeText(cur) + ' GB before context — simply does not fit' : ', there is no room past an 8B-class brain') + '. No setting fixes memory: the honest move is a new-stack plan sized to what you actually want to run. The free wins below still apply to the machine you have.</p><div class="up-rec-btns" style="justify-content:center"><button type="button" data-up-bridge="1">See the new-stack plan →</button></div></div>';
+    } else if (healthy){
+      html += '<div class="up-verdict"><h3>Don\'t buy anything yet</h3><p>Your stack is healthy — Ollama and Open WebUI are in place' + (cur && ram ? ', and ' + brainName + ' (about ' + sizeText(cur) + ' GB) sits comfortably in your ' + ram + ' GB' : '') + '. The bottleneck isn’t hardware. Anything below is free polish, not a purchase.</p></div>';
+    }
+    function recHtml(rec){
+      var s = '<div class="up-rec"><h4>' + esc(rec.title) + '</h4><p>' + rec.why + '</p><p class="up-gain"><strong>Expected gain:</strong> ' + esc(rec.gain) + '</p>';
+      var btns = '';
+      if (rec.tab) btns += '<button type="button" data-up-tab="' + rec.tab + '">' + esc(TAB_LABELS[rec.tab] || 'See the section →') + '</button>';
+      if (rec.store) btns += '<button type="button" class="up-store-btn" data-up-store="' + rec.store + '">See it in the store →</button>';
+      if (rec.store2) btns += '<button type="button" class="up-store-btn" data-up-store="' + rec.store2 + '">See the internal SSD option in the store →</button>';
+      if (btns) s += '<div class="up-rec-btns">' + btns + '</div>';
+      return s + '</div>';
+    }
+    function bandHtml(title, sub, list){
+      if (!list.length) return '';
+      var s = '<div class="up-band"><h3>' + title + '</h3><p class="up-band-sub">' + sub + '</p>';
+      list.forEach(function(r){ s += recHtml(r); });
+      return s + '</div>';
+    }
+    html += bandHtml('Free wins', '$0 — settings and software, no shopping', free);
+    html += bandHtml('Cheap wins', 'Small purchases that earn their place', cheap);
+    html += bandHtml('Big wins', 'Major hardware — only when the free wins run out', big);
+    if (!html){
+      html = '<div class="up-empty">Tell the guide a little more — a machine, a brain, or one frustration chip — and the ranking will build itself from what you enter.</div>';
+    }
+    if (b.frustrationText){
+      html += '<p class="shop-note">You also noted: “' + esc(b.frustrationText) + '” — if it maps to a chip above, tapping it sharpens the ranking.</p>';
+    }
+    resultsEl.innerHTML = html;
+    if (upMsg) upMsg.textContent = 'Ranked — biggest win for the least effort first.';
+    resultsEl.querySelectorAll('[data-up-tab]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var tab = btn.getAttribute('data-up-tab');
+        closeUpgrade();
+        if (window.__activateRoadmapTab) window.__activateRoadmapTab(tab);
+      });
+    });
+    resultsEl.querySelectorAll('[data-up-store]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var name = STORE_MAP[btn.getAttribute('data-up-store')];
+        if (name) tickInStore(name);
+      });
+    });
+    resultsEl.querySelectorAll('[data-up-bridge]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        closeUpgrade();
+        if (window.__openStackIntake) window.__openStackIntake();
+      });
+    });
+    try { resultsEl.scrollIntoView({ behavior:'smooth', block:'nearest' }); } catch(e){}
+  }
+  form.addEventListener('submit', function(e){ e.preventDefault(); runUpgrade(); });
+  var runBtn = $('upRun');
+  if (runBtn) runBtn.addEventListener('click', function(e){ e.preventDefault(); runUpgrade(); });
 })();
 </script>
 <script>
