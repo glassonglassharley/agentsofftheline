@@ -212,6 +212,7 @@
   .cards .build-card li{margin-bottom:4px}
   .cards .build-card li:last-child{margin-bottom:0}
   .cards .build-card .build-total{font-weight:700;color:var(--ink)}
+  .build-card .build-store-btn{margin-top:10px}
   table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:13.5px}
   th{font-family:system-ui,sans-serif;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;text-align:left;background:var(--surface2);color:var(--ink2);padding:11px 14px;border-bottom:1px solid var(--line-strong)}
   td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2)}
@@ -334,6 +335,7 @@
   .shop-item.done h3{text-decoration:line-through}
   .shop-note{color:var(--muted);font-size:13px;margin-top:12px}
   .shop-item.rec-pick{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-soft),var(--shadow)}
+  .shop-item.build-flash{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-bright),0 0 0 6px var(--amber-soft),var(--shadow)}
   .shop-item.rec-pick .body::before{content:"★ Recommended by your intake answers";display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber);border-radius:999px;padding:3px 9px;margin-bottom:8px}
   .shop-item.dim{opacity:.45}
   /* The intake plan, shown at the top of the Shopping List once the
@@ -1833,9 +1835,9 @@
 
   <div class="sub-head"><span class="tag">Example builds</span><h3>Three builds, start to finish</h3><p>Whole builds, not levels — the exact picks from this page, added up. Prices are the ones in the store below; they move, so treat the totals as today's shape, not a promise.</p></div>
   <div class="cards">
-    <div class="card build-card"><h3>The Starter</h3><span class="mono">entry · raspberry pi 5 · 16gb</span><p><strong>Parts:</strong></p><ul><li>Raspberry Pi 5 starter kit (16GB) — board ~$120 class; full kit price at checkout</li><li>High-endurance microSD cards (a pair) — price at checkout</li></ul><p class="build-total">Under $200 all-in, at the prices in the store below.</p><p><strong>Brain:</strong> Llama 3.2 3B or Qwen 2.5 3B — about 2GB on disk.</p><p><strong>Speed:</strong> Expect a few tokens a second — fine for short questions, voice commands, and jobs that run themselves; not live chat.</p><p><strong>Power:</strong> ~10W — a small battery bank runs it for days.</p><p><strong>Why this one:</strong> For trying the whole idea for almost nothing — and it stays useful as an always-on helper after you step up.</p></div>
-    <div class="card build-card"><h3>The Sweet Spot</h3><span class="mono">mid · mac mini · m5 pro · 64gb</span><p><strong>Parts:</strong></p><ul><li>Mac mini — M5 Pro · 64GB — from $2,699 at Apple (512GB); ~$3,199 with 1TB storage</li></ul><p class="build-total">From $2,699, at the prices in the store below.</p><p><strong>Brain:</strong> A 30B-class brain — Nemotron 3 Nano 30B (~24GB at Q4) or a 32B brain at Q4 (~19–20GB on disk). Bigger brains comfortable, helper-tuned.</p><p><strong>Speed:</strong> Expect roughly 15–30 tokens a second — comfortable, natural chat.</p><p><strong>Power:</strong> Low tens of watts, and near-silent.</p><p><strong>Why this one:</strong> The most stack for the money — big brains comfortably on a tiny power draw. The build most people should land on.</p></div>
-    <div class="card build-card"><h3>The Big Brain</h3><span class="mono">best · mac studio · 128gb</span><p><strong>Parts:</strong></p><ul><li>Mac Studio — 128GB — ~$5,099–$5,499 at Apple</li><li>Same 128GB class, other shapes: Strix Halo mini-PC ~$3,449–$3,799, or NVIDIA DGX Spark ~$5,299.</li></ul><p class="build-total">~$5,099–$5,499, at the prices in the store below.</p><p><strong>Brain:</strong> A 70B brain at Q4 — ~40–42.5GB on disk, ~44–46GB with room to think (context).</p><p><strong>Speed:</strong> Expect roughly 8–15 tokens a second — an easy reading pace, even at the biggest size.</p><p><strong>Power:</strong> Quiet and low-power next to a desktop GPU build (850W+).</p><p><strong>Why this one:</strong> For the biggest brains with long memory, without a gaming rig's heat, noise, and power draw.</p></div>
+    <div class="card build-card"><h3>The Starter</h3><span class="mono">entry · raspberry pi 5 · 16gb</span><p><strong>Parts:</strong></p><ul><li>Raspberry Pi 5 starter kit (16GB) — board ~$120 class; full kit price at checkout</li><li>High-endurance microSD cards (a pair) — price at checkout</li></ul><p class="build-total">Under $200 all-in, at the prices in the store below.</p><p><strong>Brain:</strong> Llama 3.2 3B or Qwen 2.5 3B — about 2GB on disk.</p><p><strong>Speed:</strong> Expect a few tokens a second — fine for short questions, voice commands, and jobs that run themselves; not live chat.</p><p><strong>Power:</strong> ~10W — a small battery bank runs it for days.</p><p><strong>Why this one:</strong> For trying the whole idea for almost nothing — and it stays useful as an always-on helper after you step up.</p><button type="button" class="btn primary build-store-btn" data-build-store="starter">See this build in the store →</button></div>
+    <div class="card build-card"><h3>The Sweet Spot</h3><span class="mono">mid · mac mini · m5 pro · 64gb</span><p><strong>Parts:</strong></p><ul><li>Mac mini — M5 Pro · 64GB — from $2,699 at Apple (512GB); ~$3,199 with 1TB storage</li></ul><p class="build-total">From $2,699, at the prices in the store below.</p><p><strong>Brain:</strong> A 30B-class brain — Nemotron 3 Nano 30B (~24GB at Q4) or a 32B brain at Q4 (~19–20GB on disk). Bigger brains comfortable, helper-tuned.</p><p><strong>Speed:</strong> Expect roughly 15–30 tokens a second — comfortable, natural chat.</p><p><strong>Power:</strong> Low tens of watts, and near-silent.</p><p><strong>Why this one:</strong> The most stack for the money — big brains comfortably on a tiny power draw. The build most people should land on.</p><button type="button" class="btn primary build-store-btn" data-build-store="sweet">See this build in the store →</button></div>
+    <div class="card build-card"><h3>The Big Brain</h3><span class="mono">best · mac studio · 128gb</span><p><strong>Parts:</strong></p><ul><li>Mac Studio — 128GB — ~$5,099–$5,499 at Apple</li><li>Same 128GB class, other shapes: Strix Halo mini-PC ~$3,449–$3,799, or NVIDIA DGX Spark ~$5,299.</li></ul><p class="build-total">~$5,099–$5,499, at the prices in the store below.</p><p><strong>Brain:</strong> A 70B brain at Q4 — ~40–42.5GB on disk, ~44–46GB with room to think (context).</p><p><strong>Speed:</strong> Expect roughly 8–15 tokens a second — an easy reading pace, even at the biggest size.</p><p><strong>Power:</strong> Quiet and low-power next to a desktop GPU build (850W+).</p><p><strong>Why this one:</strong> For the biggest brains with long memory, without a gaming rig's heat, noise, and power draw.</p><button type="button" class="btn primary build-store-btn" data-build-store="big">See this build in the store →</button></div>
   </div>
 </div></section>
 
@@ -4114,6 +4116,47 @@
       if (window.__openStackIntake) window.__openStackIntake();
       return;
     }
+  });
+})();
+</script>
+<script>
+(function(){
+  // "See this build in the store" — each example build card in Hardware
+  // jumps to the store, ticks that build's own items (never unticks
+  // anything), and flashes them so the visitor sees what got added.
+  var BUILD_ITEMS = {
+    starter: ['Raspberry Pi 5 starter kit', 'High-endurance microSD cards'],
+    sweet: ['Apple Mac mini M5 Pro 64GB'],
+    big: ['Apple Mac Studio 128GB step-up']
+  };
+  document.querySelectorAll('.build-store-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var names = BUILD_ITEMS[btn.getAttribute('data-build-store')];
+      if (!names) return;
+      if (window.__activateRoadmapTab) window.__activateRoadmapTab('shop');
+      var allFilter = document.querySelector('.store-filter[data-filter="all"]');
+      if (allFilter) allFilter.click();
+      var cards = [];
+      names.forEach(function(name){
+        var box = null;
+        document.querySelectorAll('.shop-check').forEach(function(c){
+          if (!box && c.getAttribute('data-name') === name) box = c;
+        });
+        if (!box) return;
+        if (!box.checked){
+          box.checked = true;
+          box.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        var card = box.closest ? box.closest('.shop-item') : null;
+        if (card) cards.push(card);
+      });
+      if (!cards.length) return;
+      cards[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      cards.forEach(function(card){ card.classList.add('build-flash'); });
+      setTimeout(function(){
+        cards.forEach(function(card){ card.classList.remove('build-flash'); });
+      }, 2000);
+    });
   });
 })();
 </script>
