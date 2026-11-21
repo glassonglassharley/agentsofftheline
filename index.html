@@ -48,8 +48,11 @@
   .sec-head p{margin:0;color:var(--ink2);max-width:74ch;font-size:14.5px;line-height:1.55}
   .tag{display:inline-block;font-family:system-ui,sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid var(--line-strong);border-radius:999px;padding:4px 10px;margin-bottom:10px;background:var(--surface)}
 
-  /* INTAKE — opened from the All Features hamburger menu (top-left), shown in
-     normal page flow at the top of the hero. No standalone button on the page. */
+  /* INTAKE — a full view of its own (body.intake-view, styled further
+     below next to the upgrade view): opened from the homepage Start
+     Here card, the header button, or the All Features menu. The
+     legacy panel-card rules below stay for the .open state; the
+     view rules win by specificity whenever the view is on. */
   section{scroll-margin-top:24px}
   #intake{display:none}
   .hero #intake{padding-top:0;padding-bottom:0}
@@ -1052,13 +1055,11 @@
 
 <style>
   /* ============================================================
-     HOMEPAGE START HERE — the homepage carries no intake any
-     more: under the headline / lede / video there is only the
-     big Start Here button (below), which walks straight into
-     the inside pages. The Build Your Stack intake lives on the
-     Architecture page, opened from the header's top-right
-     button or the Explore the Stack menu. Same form, same
-     recommendations.
+     HOMEPAGE START HERE — under the headline / lede / video sit
+     the two path cards. Start Here opens the Build Your Stack
+     intake as its own full view (body.intake-view) — the same
+     view the header's top-right button and the Explore the
+     Stack menu open. Same form, same recommendations.
      ============================================================ */
   .intake-teaser{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%;max-width:640px;margin:20px auto 0;text-align:center}
   .intake-teaser[hidden]{display:none}
@@ -1189,15 +1190,12 @@
   .visually-hidden{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
   /* ============================================================
-     INTAKE MOVED TO ARCHITECTURE — the Build Your Stack intake
-     no longer lives on the homepage. The top-right corner of the
-     header bar, where the old offline note used to sit, now
-     carries the intake
-     button instead; the intake form itself opens at the top of
-     the Architecture page (The Stack), right under its heading.
-     The header only shows on topic pages, so the button is there
-     on the Architecture page — and pressing it from any other
-     topic brings you to Architecture and opens the intake.
+     INTAKE AS ITS OWN VIEW — the Build Your Stack intake opens
+     as a full view of its own (body.intake-view), not inside any
+     topic page. The top-right corner of the header bar, where the
+     old offline note used to sit, carries the intake button;
+     pressing it from any topic leaves the topic view and opens
+     the intake view.
      ============================================================ */
   .header-intake-btn{flex:none;display:inline-flex;align-items:center;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:800;font-size:13.5px;color:#1c1305;background:var(--amber-bright);border:1.5px solid var(--amber);border-radius:999px;padding:9px 15px;min-height:44px;cursor:pointer;box-shadow:0 6px 16px -8px rgba(180,83,9,.55);transition:background-color .16s ease,color .16s ease,box-shadow .16s ease}
   .header-intake-btn:hover{background:var(--amber);color:#fff}
@@ -1421,6 +1419,22 @@
   #upgradeBack{display:inline-flex;align-items:center;font-family:system-ui,sans-serif;font-weight:700;font-size:13.5px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line-strong);border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer;margin-bottom:16px}
   #upgradeBack:hover{border-color:var(--amber);color:var(--amber)}
   #upgradeBack:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+  /* The intake is a full view of its own too, mirroring the upgrade
+     view above: opening it puts body.intake-view on, the masthead
+     and home extras go away, the site header stays, and #intake
+     shows as a normal full page section. The legacy panel-card look
+     from #intake.open (border, shadow, card background and padding,
+     capped width and auto margins) is neutralized here so the
+     section renders flat, full-width, like #upgrade does. */
+  body.intake-view #intake{display:block;text-align:left;position:static;width:auto;max-width:none;margin:0;max-height:none;overflow:visible;background:transparent;border:none;border-radius:0;box-shadow:none;padding:40px 0 12px}
+  body.intake-view #intake .wrap{max-width:min(1120px,100%);margin:0 auto;padding:0 20px}
+  body.intake-view #masthead{display:none}
+  body.intake-view #homeExtras{display:none!important}
+  body.intake-view .site-header{display:block;position:static}
+  #intakeBack{display:inline-flex;align-items:center;font-family:system-ui,sans-serif;font-weight:700;font-size:13.5px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line-strong);border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer;margin-bottom:16px}
+  #intakeBack:hover{border-color:var(--amber);color:var(--amber)}
+  #intakeBack:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
   .up-results-head{font-family:var(--serif);font-weight:700;font-size:26px;letter-spacing:-.01em;margin:0 0 6px;text-align:left}
   .up-privacy{margin:0 0 14px;max-width:64ch;text-align:left;color:var(--ink2);font-size:13.5px;line-height:1.55}
   .up-saved-note{margin:0 0 12px;max-width:64ch;text-align:left;background:var(--teal-soft);border:1px solid var(--teal);border-radius:10px;padding:10px 14px;font-size:13.5px;color:var(--ink2)}
@@ -1532,6 +1546,7 @@
 <header class="hero">
   <div class="wrap">
     <section id="intake" aria-label="Build your stack — intake questionnaire"><div class="wrap">
+  <button type="button" id="intakeBack">← Back</button>
   <div class="sec-head"><button type="button" class="intake-close" id="intakeClose">Close ✕</button><span class="tag">Build your stack</span><h2>Intake — a few quick questions, then your personal plan</h2><p>Answer a few questions, press <strong>Build my stack</strong>, and your personal plan appears right below — computer, brain, power, and the exact shopping items, ticked for you in the Shopping List. Everything happens <strong>right here on your device</strong>: nothing sent anywhere, no account.</p></div>
 
   <form class="intake-form" id="intakeForm">
@@ -3177,23 +3192,13 @@
   document.getElementById('intakeDim').addEventListener('change', applyHighlights);
   document.getElementById('intakeClear').addEventListener('click', function(){ recNames = []; clearHighlights(); var ir = document.getElementById('intakeResultInline'); if (ir) ir.classList.remove('show'); var sr = document.getElementById('intakeResult'); if (sr) sr.classList.remove('show'); intakeMsg.textContent = 'Highlights cleared — the full menu is back to neutral.'; });
 
-  // ---- Intake lives on the Architecture page, in normal page flow ----
+  // ---- Open / close: a full view of its own (body.intake-view),
+  // not a panel inside another page. The section stays where it
+  // sits in the markup, in the hero before the masthead, exactly
+  // like #upgrade. Opening swaps the homepage for the intake view;
+  // Back (or the Close button, the header Home icon, or Escape)
+  // returns to the two-path homepage exactly as it was. ----
   var intakeSection = document.getElementById('intake');
-  // The Build Your Stack intake no longer lives on the homepage: move
-  // it inside the Architecture page (#stack), right under that page's
-  // section head, so it opens at the top of the page. It stays the same
-  // form with the same recommendation behaviour. The button in the
-  // top-right corner of the header bar (where the "No Wi-Fi needed"
-  // note used to sit) and the Explore the Stack menu link both bring
-  // the visitor to this page and open the intake here.
-  (function(){
-    var stack = document.getElementById('stack');
-    if (!stack || !intakeSection) return;
-    var wrap = stack.querySelector('.wrap') || stack;
-    var head = wrap.querySelector('.sec-head');
-    if (head && head.nextSibling) wrap.insertBefore(intakeSection, head.nextSibling);
-    else wrap.appendChild(intakeSection);
-  })();
   var headerIntakeBtn = document.getElementById('headerIntakeBtn');
   function setHeaderIntake(open){
     if (headerIntakeBtn) headerIntakeBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -3205,31 +3210,60 @@
     var mb = document.getElementById('menuBtn');
     if (mb) mb.focus();
   }
+  function intakeScrollTop(){
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch(e){ window.scrollTo(0, 0); }
+  }
   function openIntake(){
     intakeSection.classList.add('open');
+    document.body.classList.add('intake-view');
     setHeaderIntake(true);
-    var closeBtn = document.getElementById('intakeClose');
-    if (closeBtn) closeBtn.focus();
+    var teaser = document.getElementById('intakeTeaserBtn');
+    if (teaser) teaser.setAttribute('aria-expanded', 'true');
+    intakeScrollTop();
+    var backBtn = document.getElementById('intakeBack');
+    if (backBtn) { try { backBtn.focus(); } catch(e){} }
+    else { var closeBtn = document.getElementById('intakeClose'); if (closeBtn) closeBtn.focus(); }
   }
   function closeIntake(){
     intakeSection.classList.remove('open');
     intakeSection.classList.remove('home-on');
+    document.body.classList.remove('intake-view');
     setHeaderIntake(false);
+    var teaser = document.getElementById('intakeTeaserBtn');
+    if (teaser) teaser.setAttribute('aria-expanded', 'false');
+  }
+  function backHomeFromIntake(){
+    closeIntake();
+    showHome();
+    intakeScrollTop();
   }
   function goToIntake(){
-    // Land on the Architecture page first (switching topics closes any
-    // open intake), then open the intake at the top of that page.
-    if (typeof activateTab === 'function') activateTab('overview');
+    // Mirror how the store banner enters the upgrade view: leave
+    // the upgrade view and any topic view first, then open the
+    // intake as the full view.
+    if (typeof window.__closeStackUpgrade === 'function') window.__closeStackUpgrade();
+    if (document.body.classList.contains('topic-view')) showHome();
     openIntake();
-    setTimeout(function(){ intakeSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 40);
+    intakeScrollTop();
   }
   window.__openStackIntake = goToIntake;
   if (headerIntakeBtn) headerIntakeBtn.addEventListener('click', function(){ goToIntake(); });
-  // The homepage Start Here button is wired further below, next to the
-  // tab code: it enters the pages at the Architecture page.
-  document.getElementById('intakeClose').addEventListener('click', function(){ closeIntake(); intakeFocusBack(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && intakeSection.classList.contains('open')) { closeIntake(); intakeFocusBack(); } });
-  if (window.location && window.location.hash === '#intake') openIntake();
+  // The homepage Start Here button is wired further below, next to
+  // the tab code: it opens this same intake view.
+  var intakeBackBtn = document.getElementById('intakeBack');
+  if (intakeBackBtn) intakeBackBtn.addEventListener('click', function(){ backHomeFromIntake(); intakeFocusBack(); });
+  document.getElementById('intakeClose').addEventListener('click', function(){ backHomeFromIntake(); intakeFocusBack(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && (document.body.classList.contains('intake-view') || intakeSection.classList.contains('open'))) { backHomeFromIntake(); intakeFocusBack(); } });
+  if (window.location && window.location.hash === '#intake') goToIntake();
+  // If a topic tab gets activated while this view is open (header
+  // menu, a section link), the view state must not survive.
+  if (typeof MutationObserver !== 'undefined'){
+    try {
+      new MutationObserver(function(){
+        if (document.body.classList.contains('topic-view') && document.body.classList.contains('intake-view')) closeIntake();
+      }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    } catch(e){}
+  }
 
   // ---- Hamburger menu: all features in one grouped, readable panel ----
   var menuBtn = document.getElementById('menuBtn');
@@ -3268,7 +3302,7 @@
       }
       if (isIntakeLink) {
         e.preventDefault();
-        // The intake lives on the Architecture page now: go there and open it
+        // The intake is a full view of its own: open it directly
         goToIntake();
       }
     });
@@ -3419,15 +3453,15 @@
   window.__showRoadmapHome = showHome;
   // (The header's Home icon does this job — it calls showHome()
   // just like the old Homepage menu row did.)
-  // Homepage button: Start Here walks straight into the inside
-  // pages (first feature first). The intake is opened from the
-  // header's top-right button or the Explore the Stack menu.
+  // Homepage button: Start Here opens the intake as its own full
+  // view — the same view the header's top-right button and the
+  // Explore the Stack menu link open.
   var startHereBtn = document.getElementById('intakeTeaserBtn');
-  if (startHereBtn) startHereBtn.addEventListener('click', function(){ activateTab('overview', 'stack'); window.scrollTo({top:0, behavior:'smooth'}); });
+  if (startHereBtn) startHereBtn.addEventListener('click', function(){ goToIntake(); });
   // Start on the right tab for a shared #hash, otherwise the clean home page
   (function(){
     var h = (window.location.hash || '').replace('#','');
-    if (h === 'intake') { activateTab('overview'); openIntake(); }
+    if (h === 'intake') { goToIntake(); }
     else if (h && document.getElementById(h) && TAB_MAP[tabForSection(h)]) activateTab(tabForSection(h), h);
     else if (h.indexOf('tab-') === 0 && TAB_MAP[h.slice(4)]) activateTab(h.slice(4));
     else showHome();
@@ -4448,6 +4482,7 @@
   function openUpgrade(){
     // Only one of intake / upgrade open at a time
     if (intakeSection){ intakeSection.classList.remove('open'); intakeSection.classList.remove('home-on'); }
+    document.body.classList.remove('intake-view');
     var hib = $('headerIntakeBtn'); if (hib) hib.setAttribute('aria-expanded','false');
     showFormState();
     document.body.classList.add('upgrade-view');
