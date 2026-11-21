@@ -267,6 +267,29 @@
   .phase details.phase-steps li:last-child{margin-bottom:2px}
   .phase details.phase-steps pre{margin:8px 0 6px;background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:10px 12px;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
   .phase details.phase-steps pre code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;line-height:1.55;background:transparent;border:none;border-radius:0;padding:0;color:inherit;white-space:pre}
+  /* Software "Compare the brains" expander — the same .custom-adjust /
+     phase-steps pattern as the Build Plan, used outside a phase card:
+     centred in the reading column, with its table in a sideways-scroll
+     box so it stays readable on a phone. */
+  #software details.phase-steps{margin:18px auto 0;text-align:left;width:100%;max-width:980px}
+  #software details.phase-steps>summary{font-family:system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--amber);cursor:pointer;min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center;padding:9px 10px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface2);list-style-position:inside}
+  #software details.phase-steps>summary:hover{color:var(--ink);border-color:var(--amber)}
+  #software details.phase-steps>summary:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .compare-scroll{margin:14px 0 4px;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;border-radius:var(--radius)}
+  .compare-scroll table.compare-table{min-width:760px}
+  .compare-scroll table.compare-table th{text-align:left}
+  .compare-scroll table.compare-table td{text-align:left}
+  .compare-scroll table.compare-table td:first-child{min-width:150px}
+  .compare-scroll table.compare-table td .brain-note{display:block;font-weight:400;font-size:12.5px;color:var(--ink2);margin-top:3px}
+  @media (max-width:860px){
+    .compare-scroll table.compare-table{display:table;width:100%}
+    .compare-scroll table.compare-table thead{display:table-header-group}
+    .compare-scroll table.compare-table tbody{display:table-row-group}
+    .compare-scroll table.compare-table tr{display:table-row;padding:0;border-bottom:none}
+    .compare-scroll table.compare-table td{display:table-cell;border-bottom:1px solid var(--line);padding:11px 14px;text-align:left}
+    .compare-scroll table.compare-table td::before{display:none;content:none}
+    .compare-scroll table.compare-table tr:last-child td{border-bottom:none}
+  }
 
   /* HERMES */
   .beforeafter{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
@@ -1892,6 +1915,7 @@
     </tbody>
   </table>
   <p class="sub-note">Rule of thumb: a brain needs a little more memory than its download size — file plus room for the conversation. Memory decides your level; disk space almost never does.</p>
+  <details class="custom-adjust phase-steps"><summary>Compare the brains — sizes and speeds</summary><div class="compare-scroll"><table class="compare-table"><thead><tr><th>Brain</th><th>Best at</th><th>Size on disk (Q4)</th><th>Memory it needs</th><th>Speed feel</th></tr></thead><tbody><tr><td data-k="Brain">Small starter brain, 3B class</td><td data-k="Best at">Quick jobs and helper tasks; runs anywhere, including the Pi</td><td data-k="Size on disk (Q4)">~2 GB</td><td data-k="Memory it needs">~4 GB</td><td data-k="Speed feel">Pi: a few words a second · Mini 64GB: very fast · 128GB class: very fast</td></tr><tr><td data-k="Brain">Llama 3.1 · 8B</td><td data-k="Best at">Fast helper and background jobs, quick everyday answers</td><td data-k="Size on disk (Q4)">~4.7 GB</td><td data-k="Memory it needs">~8 GB</td><td data-k="Speed feel">Pi: too slow to enjoy · Mini 64GB: very fast · 128GB class: very fast</td></tr><tr><td data-k="Brain">Qwen 3 · 14B</td><td data-k="Best at">Everyday chat and writing, the strong daily brain</td><td data-k="Size on disk (Q4)">~9 GB</td><td data-k="Memory it needs">~16 GB</td><td data-k="Speed feel">Pi: too big · Mini 64GB: fast · 128GB class: fast</td></tr><tr><td data-k="Brain">Nemotron 3 Nano · 30B<span class="brain-note">Same class: Qwen 3 · 32B at ~19 GB</span></td><td data-k="Best at">Multi-step helper work, the sweet spot for a 64GB machine</td><td data-k="Size on disk (Q4)">~24 GB</td><td data-k="Memory it needs">~32 GB or more</td><td data-k="Speed feel">Pi: too big · Mini 64GB: ~15–30 tokens a second · 128GB class: fast</td></tr><tr><td data-k="Brain">Llama 3.3 · 70B</td><td data-k="Best at">Deep research and hard questions</td><td data-k="Size on disk (Q4)">~40 GB</td><td data-k="Memory it needs">A 128GB-class machine — ~44–46 GB with a working context</td><td data-k="Speed feel">Pi: too big · Mini 64GB: too big · 128GB class: ~8–15 tokens a second</td></tr><tr><td data-k="Brain">nomic-embed-text — utility brain, not a chat brain</td><td data-k="Best at">File search — it turns your files into a searchable index</td><td data-k="Size on disk (Q4)">Under 1 GB</td><td data-k="Memory it needs">~2 GB</td><td data-k="Speed feel">Runs in the background on any machine in the guide, including the Pi</td></tr></tbody></table></div></details>
 </div></section>
 
 <!-- POWER -->
