@@ -3453,11 +3453,14 @@
   window.__showRoadmapHome = showHome;
   // (The header's Home icon does this job — it calls showHome()
   // just like the old Homepage menu row did.)
-  // Homepage button: Start Here opens the intake as its own full
-  // view — the same view the header's top-right button and the
-  // Explore the Stack menu link open.
+  // Homepage button: Start Here walks the guide from the top — it
+  // opens the Architecture topic page (the Stack), where the intake
+  // lives further down the path. It does not open the intake form.
   var startHereBtn = document.getElementById('intakeTeaserBtn');
-  if (startHereBtn) startHereBtn.addEventListener('click', function(){ goToIntake(); });
+  if (startHereBtn) startHereBtn.addEventListener('click', function(){
+    if (window.__activateRoadmapTab) window.__activateRoadmapTab('overview');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
   // Start on the right tab for a shared #hash, otherwise the clean home page
   (function(){
     var h = (window.location.hash || '').replace('#','');
