@@ -1722,6 +1722,7 @@
         <label><input type="checkbox" name="upSoftware" value="voice" /> Voice — whisper etc.</label>
         <label><input type="checkbox" name="upSoftware" value="rag" /> File search / RAG</label>
         <label><input type="checkbox" name="upSoftware" value="helpers" /> Helpers / agents</label>
+        <label><input type="checkbox" name="upSoftware" value="hermes" /> Hermes Agent</label>
         <label><input type="checkbox" name="upSoftware" value="none" /> None yet</label>
       </fieldset>
       <fieldset class="intake-q">
@@ -2089,6 +2090,7 @@
     <div class="card"><h3>Kokoro / Piper</h3><span class="mono">text → speech</span><span class="offline-badge">Offline capable</span><p>Voices that live on the machine, so the stack can talk back — summaries read aloud, hands-free answers — nothing sent anywhere.</p></div>
     <div class="card"><h3>Local file search</h3><span class="mono">your files, searchable</span><span class="offline-badge">Offline capable</span><p>Searches only the folders you approve, so the brains answer from your own material, privately.</p></div>
     <div class="card"><h3>What you already have</h3><span class="mono">already yours</span><p>Tools or helper agents you already run usually carry over. Phase 3 just changes where they get their brains.</p></div>
+    <div class="card"><h3>Hermes Agent</h3><span class="mono">by Nous Research · an agent layer on Ollama</span><span class="offline-badge">Offline capable</span><p>An optional agent layer that sits on top of the home base. Chat tells a brain things; an agent can remember, use tools, and do multi-step jobs on its own. Point it at Ollama on this machine — <span class="mono">http://127.0.0.1:11434/v1</span> — or use its local model support, and with a local model chosen, nothing leaves the machine. For people who want memory, skills, tools, and scheduled tasks rather than plain chat. Optional — the stack is complete without it.</p></div>
     <div class="card"><h3>Linger</h3><span class="mono">a ready-made personal agent · free · open source</span><span class="offline-badge">Offline capable</span><p>A personal agent that runs fully on your computer — Mac, Windows or Linux — nothing in the cloud. Its PolyStrata engine spreads a big brain across graphics card, memory, and disk, so even a very large brain runs on an everyday computer. Speed numbers are the makers' own claims, untested outside the project.</p><p><a href="https://github.com/simplexai-labs/linger">View on GitHub →</a></p></div>
   </div>
 
@@ -4767,6 +4769,14 @@
     var brainSizeAdvice = false;
 
     // ---------- MORE LOCAL ----------
+    // Hermes Agent, when it is part of the stack but something
+    // else in the setup still reaches for the cloud (a cloud
+    // chip, or a cloud brain named in the brain field): one step
+    // that points the agent at the local home base instead.
+    var hermesCloud = hasSoft('hermes') && (hasCloud('cloudchat') || hasCloud('cloudvoice') || hasCloud('cloudfiles') || closedBrain);
+    if (hermesCloud){
+      push(local, { title:'Point Hermes Agent at your local Ollama', why:'You run Hermes Agent (by Nous Research) on top of Ollama, but part of this setup still reaches for the cloud. Point Hermes at Ollama’s OpenAI-compatible endpoint on this machine — <span class="mono">http://127.0.0.1:11434/v1</span> — and choose a local model there. Configured for local models, the agent’s memory, skills, and tools all work from this machine, and nothing needs to leave it.', effort:'Ten minutes', tab:'software' });
+    }
     var chatCovered = false;
     if (hasCloud('cloudchat')){
       push(local, { title:'Run your chat fully local — Ollama + Open WebUI', why:'You said chat still needs the internet. Run the chat on this machine instead: Ollama as the home base, Open WebUI as the front door — the same kind of conversation, with no cloud account in the middle and nothing leaving the house.', effort:'An evening', tab:'software' });
@@ -4891,6 +4901,18 @@
       push(anyway, { title:'Size your brains to the power budget', why:'You run off-grid / on battery. Brain size is power draw: the smaller the brain, the longer the bank lasts — the Power page works the hours out for your setup, so runtime is predictable instead of a battery surprise.', effort:'Ten minutes', tab:'power' });
     }
 
+    // Hermes Agent with no cloud piece left to fix: it counts as
+    // the stack's agent layer. When the verdict below applies,
+    // the acknowledgement lives in the verdict itself; otherwise
+    // it lands here as one polish item, with a care note about
+    // the memory and skills it keeps on this machine.
+    if (hasSoft('hermes') && !hermesCloud && !verdict){
+      var hermesCare = hasFrust('fragile')
+        ? 'One care note: its memory and skills live on this machine — include them in the backup-first routine in More secure above, so an update can never take them with it.'
+        : 'One care note: its memory and skills live on this machine, so include them in your backup routine, along with the brains and settings, so they survive a dead drive.';
+      push(anyway, { title:'Hermes Agent is your agent layer', why:'Hermes Agent (by Nous Research) already gives this stack a real agent layer — memory, skills, tools, and scheduled tasks on top of Ollama, rather than plain chat. ' + hermesCare, effort:'Ten minutes', tab:'software' });
+    }
+
     // A stack that is already in good shape gets the verdict and
     // polish only — never a project list.
     if (verdict){
@@ -4907,7 +4929,8 @@
     if (ceiling){
       html += '<div class="up-ceiling"><h3>This machine has hit its ceiling</h3><p>With ' + ram + ' GB of memory' + (cur && cur >= 32 ? ', a ' + cur + 'B-class brain — about ' + sizeText(cur) + ' GB before context — simply does not fit' : ', there is no room past an 8B-class brain') + '. No setting changes that: the machine itself is the limit, and the honest move is a new-stack plan sized to what you actually want to run. The steps below still apply to the machine you have.</p><div class="up-rec-btns" style="justify-content:flex-start"><button type="button" data-up-bridge="1">See the new-stack plan →</button></div></div>';
     } else if (verdict){
-      html += '<div class="up-verdict"><h3>This is already in good shape</h3><p>Nothing in your setup needs the internet, the brain is an open-weight one you picked yourself, and the machine is not sitting online all day — which is the whole point of this guide, already true of your stack. Anything below is small polish, not a project.</p></div>';
+      var verdictHermes = hasSoft('hermes') ? ' Hermes Agent counts as your agent layer — its memory, skills, tools, and scheduled tasks all live on this machine. One care note: that memory and those skills live only here, so include them in your backup routine.' : '';
+      html += '<div class="up-verdict"><h3>This is already in good shape</h3><p>Nothing in your setup needs the internet, the brain is an open-weight one you picked yourself, and the machine is not sitting online all day — which is the whole point of this guide, already true of your stack.' + verdictHermes + ' Anything below is small polish, not a project.</p></div>';
     }
     function recHtml(rec){
       var s = '<div class="up-rec"><h4>' + esc(rec.title) + '</h4><p>' + rec.why + '</p><p class="up-gain"><strong>Effort:</strong> ' + esc(rec.effort) + '</p>';
