@@ -967,16 +967,17 @@
      lives behind “See details”, which opens the full product
      view. Overrides the earlier centred list rows for #shop.
      ============================================================ */
-  #shop .store-bar{background:#131921;color:#fff;border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;box-shadow:var(--shadow);margin-bottom:14px}
+  #shop .store-bar{background:transparent;color:var(--ink);border-radius:0;padding:16px 18px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;box-shadow:none;margin-bottom:14px}
   #shop .store-logo{font-family:system-ui,sans-serif;font-weight:800;font-size:19px;letter-spacing:-.01em}
-  #shop .store-filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  #shop .store-filters{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
   #shop .store-filter{font-family:system-ui,sans-serif;font-weight:700;font-size:13px;line-height:1.25;text-align:center;white-space:normal;background:#232f3e;color:#fff;border:1.5px solid #37475a;border-radius:999px;padding:9px 14px;min-height:40px;cursor:pointer}
   #shop .store-filter:hover{border-color:var(--amber-bright);color:var(--amber-bright)}
   #shop .store-filter.is-on{background:var(--amber-bright);border-color:var(--amber-bright);color:#1c1305}
   #shop .store-cart-note{font-size:12.5px;color:#d5d9d9;max-width:64ch}
-  /* Affiliate disclosure — a quiet small-print note under the store
-     header, in the page's plain style. Not a banner, not an ad. */
+  /* Affiliate disclosure — a quiet small-print note at the foot of the
+     store section, in the page's plain style. Not a banner, not an ad. */
   #shop .affiliate-note{max-width:72ch;margin:0 auto 14px;text-align:center;font-size:13px;line-height:1.55;color:var(--muted)}
+  #shop .shop-foot-note{margin:24px auto 0;padding-top:14px;border-top:1px solid var(--line)}
   #shop .shop-group{font-family:system-ui,sans-serif;font-size:18px;font-weight:800;letter-spacing:0;text-transform:none;color:var(--ink);text-align:left;max-width:1120px;margin:30px auto 12px;padding-bottom:8px;border-bottom:2px solid var(--line-strong)}
   #shop .shop-list{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:14px;max-width:1120px;margin-left:auto;margin-right:auto}
   /* — the uniform card — */
@@ -1249,7 +1250,7 @@
     .tab-next{margin-bottom:10px}
     /* store: two calm columns with even gutters on small phones */
     #shop .shop-list{gap:10px}
-    #shop .store-bar{border-radius:14px}
+    #shop .store-bar{border-radius:0}
     /* intake: full-width, thumb-friendly action buttons */
     .intake-actions .btn{flex:1 1 100%;text-align:center}
     .intake-actions .btn-msg{flex:1 1 100%;text-align:center}
@@ -1342,7 +1343,7 @@
          the store scrolls under it, slimmed to the logo and one
          swipeable row of pills (the how-it-works note steps
          aside on phones; the same guidance sits under the bar) — */
-    #shop .store-bar{position:sticky;top:0;z-index:60;margin-left:-16px;margin-right:-16px;padding:10px 12px;gap:8px;border-radius:0 0 14px 14px}
+    #shop .store-bar{position:sticky;top:0;z-index:60;margin-left:-16px;margin-right:-16px;padding:10px 12px;gap:8px;border-radius:0}
     #shop .store-logo{font-size:16px}
     #shop .store-cart-note{display:none}
     #shop .store-filters{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;width:100%;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
@@ -2438,7 +2439,7 @@
 
 <!-- SHOP -->
 <section id="shop"><div class="wrap">
-  <p class="affiliate-note">Some links here are affiliate links — buying through one may earn the guide a small commission at no extra cost to you. Picks stay value-first.</p>
+  <div class="sec-head"><h2>Offline Store</h2></div>
 
   <div class="store-bar" role="navigation" aria-label="Store departments">
     <span class="store-logo">🛒 Offline Store</span>
@@ -2571,6 +2572,7 @@
   </div>
 
   <p class="shop-note">That's the whole list. One pick per step is a build — everything ticked is a warehouse.</p>
+  <p class="affiliate-note shop-foot-note">Some links here are affiliate links — buying through one may earn the guide a small commission at no extra cost to you. Picks stay value-first.</p>
 </div></section>
 
 </main>
