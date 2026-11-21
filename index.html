@@ -202,6 +202,16 @@
   .card h3{margin:0 0 4px;font-size:15px;font-weight:700}
   .card .mono{font-size:12.5px;color:var(--amber);display:block;margin-bottom:8px}
   .card p{margin:0;color:var(--ink2);font-size:13.5px;line-height:1.55}
+  /* EXAMPLE BUILDS — closing block of Hardware: whole builds, parts added up.
+     Title and mono stay centred like every card; the parts list and the
+     labelled lines read left, like the phase cards' step lists. */
+  .cards .build-card{text-align:left}
+  .cards .build-card p{text-align:left;margin:0 0 9px}
+  .cards .build-card p:last-child{margin-bottom:0}
+  .cards .build-card ul{margin:0 0 9px;padding-left:17px;color:var(--ink2);font-size:13.5px;line-height:1.55;text-align:left}
+  .cards .build-card li{margin-bottom:4px}
+  .cards .build-card li:last-child{margin-bottom:0}
+  .cards .build-card .build-total{font-weight:700;color:var(--ink)}
   table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:13.5px}
   th{font-family:system-ui,sans-serif;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;text-align:left;background:var(--surface2);color:var(--ink2);padding:11px 14px;border-bottom:1px solid var(--line-strong)}
   td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink2)}
@@ -1796,6 +1806,13 @@
       <div class="callout"><strong>The simple pick:</strong> start with <strong>Nano 30B</strong> — built for helper work, fast for its size, fits the 64GB Mac mini. <strong>Super</strong> is the reason to step up to 128GB; <strong>Ultra</strong> is too big for any home computer.</div>
       <p style="margin-top:14px">Nemotron is also in the brain list below.</p>
     </div>
+  </div>
+
+  <div class="sub-head"><span class="tag">Example builds</span><h3>Three builds, start to finish</h3><p>Whole builds, not levels — the exact picks from this page, added up. Prices are the ones in the store below; they move, so treat the totals as today's shape, not a promise.</p></div>
+  <div class="cards">
+    <div class="card build-card"><h3>The Starter</h3><span class="mono">entry · raspberry pi 5 · 16gb</span><p><strong>Parts:</strong></p><ul><li>Raspberry Pi 5 starter kit (16GB) — board ~$120 class; full kit price at checkout</li><li>High-endurance microSD cards (a pair) — price at checkout</li></ul><p class="build-total">Under $200 all-in, at the prices in the store below.</p><p><strong>Brain:</strong> Llama 3.2 3B or Qwen 2.5 3B — about 2GB on disk.</p><p><strong>Speed:</strong> Expect a few tokens a second — fine for short questions, voice commands, and jobs that run themselves; not live chat.</p><p><strong>Power:</strong> ~10W — a small battery bank runs it for days.</p><p><strong>Why this one:</strong> For trying the whole idea for almost nothing — and it stays useful as an always-on helper after you step up.</p></div>
+    <div class="card build-card"><h3>The Sweet Spot</h3><span class="mono">mid · mac mini · m5 pro · 64gb</span><p><strong>Parts:</strong></p><ul><li>Mac mini — M5 Pro · 64GB — from $2,699 at Apple (512GB); ~$3,199 with 1TB storage</li></ul><p class="build-total">From $2,699, at the prices in the store below.</p><p><strong>Brain:</strong> A 30B-class brain — Nemotron 3 Nano 30B (~24GB at Q4) or a 32B brain at Q4 (~19–20GB on disk). Bigger brains comfortable, helper-tuned.</p><p><strong>Speed:</strong> Expect roughly 15–30 tokens a second — comfortable, natural chat.</p><p><strong>Power:</strong> Low tens of watts, and near-silent.</p><p><strong>Why this one:</strong> The most stack for the money — big brains comfortably on a tiny power draw. The build most people should land on.</p></div>
+    <div class="card build-card"><h3>The Big Brain</h3><span class="mono">best · mac studio · 128gb</span><p><strong>Parts:</strong></p><ul><li>Mac Studio — 128GB — ~$5,099–$5,499 at Apple</li><li>Same 128GB class, other shapes: Strix Halo mini-PC ~$3,449–$3,799, or NVIDIA DGX Spark ~$5,299.</li></ul><p class="build-total">~$5,099–$5,499, at the prices in the store below.</p><p><strong>Brain:</strong> A 70B brain at Q4 — ~40–42.5GB on disk, ~44–46GB with room to think (context).</p><p><strong>Speed:</strong> Expect roughly 8–15 tokens a second — an easy reading pace, even at the biggest size.</p><p><strong>Power:</strong> Quiet and low-power next to a desktop GPU build (850W+).</p><p><strong>Why this one:</strong> For the biggest brains with long memory, without a gaming rig's heat, noise, and power draw.</p></div>
   </div>
 </div></section>
 
