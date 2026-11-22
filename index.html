@@ -856,6 +856,21 @@
      ============================================================ */
   .stack-figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
   .stack-svg{display:block;width:100%;height:auto}
+  /* Stack diagram tap-to-enlarge: the figure itself is the trigger and
+     the lightbox clones the live figure at open time, so the enlarged
+     view can never drift from the diagram on the page. The stage
+     scrolls when the clone is still bigger than the screen (small
+     phones) instead of shrinking the diagram to illegibility. */
+  .stack-figure[role="button"]{cursor:zoom-in}
+  .stack-figure[role="button"]:focus-visible{outline:2.5px solid var(--amber);outline-offset:3px}
+  .stack-hint{display:flex;width:fit-content;align-items:center;gap:6px;margin:12px auto 0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid var(--line-strong);border-radius:999px;padding:4px 10px;background:var(--surface2)}
+  .stack-hint svg{display:block;flex:none}
+  .stack-lightbox{position:fixed;inset:0;z-index:300;background:rgba(8,6,3,.88)}
+  .stack-lightbox[hidden]{display:none}
+  .stack-lightbox-stage{position:absolute;inset:0;overflow:auto;display:flex;padding:64px 12px 20px}
+  .stack-lightbox .stack-figure{flex:none;margin:auto;width:min(1100px,96vw,calc((100vh - 140px)*1.3913));width:min(1100px,96vw,calc((100dvh - 140px)*1.3913));min-width:760px;cursor:default}
+  .stack-lightbox-close{position:absolute;top:14px;right:14px;z-index:1;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line-strong);background:var(--surface);color:var(--ink);font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .stack-lightbox-close:hover{border-color:var(--amber);color:var(--amber)}
   .d-frame{fill:var(--surface2);stroke:var(--line-strong);stroke-width:2.5}
   .d-tab{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.5}
   .d-tabtext{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;fill:var(--muted)}
@@ -1937,7 +1952,7 @@
     <div class="principle"><span class="big">0</span><h3>Nothing sent out</h3><p>Chat, voice, files, and helpers all work with Wi-Fi off. The test: switch on airplane mode — everything still has to work.</p></div>
     <div class="principle"><span class="big">1×</span><h3>One big download</h3><p>Starlink is part of the build: your own dish — no city wires — pulls everything down in one setup download and keeps you connected off-grid whenever you want. The agent itself never needs a connection to run.</p></div>
   </div>
-  <figure class="stack-figure">
+  <figure class="stack-figure" role="button" tabindex="0" aria-label="Enlarge the stack diagram">
     <svg class="stack-svg" viewBox="0 0 960 690" role="img" aria-label="Stack diagram: you and your voice at the top, then the chat screen, then the Ollama home base, then the brains, ears, voice and your files, then your helper crew — all on your machine. Cloud services sit outside a dashed line, disconnected.">
       <title>Stack diagram</title>
       <desc>Five layers inside the wall of your machine: you, the chat screen, the Ollama home base, the brains, ears, voice and files, then your helper crew. Below the wall, cloud services sit crossed out — not connected, ever — while Starlink crosses at one small gate for the setup download.</desc>
@@ -2026,6 +2041,7 @@
       <rect class="d-chip" x="648" y="594" width="298" height="40" rx="20"/>
       <text class="d-chiptext" x="797" y="619" text-anchor="middle">An honest note about Claude</text>
     </svg>
+    <span class="stack-hint" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/><path d="M10.5 7.5v6M7.5 10.5h6"/></svg>Tap to enlarge</span>
   </figure>
   <div class="arch-text">
     <div class="layer-words">
@@ -5112,6 +5128,70 @@
   btn.addEventListener('click', function(){
     if (document.body.classList.contains('topic-view') && typeof window.__showRoadmapHome === 'function') window.__showRoadmapHome();
     if (typeof window.__openStackUpgrade === 'function') window.__openStackUpgrade();
+  });
+})();
+</script>
+<script>
+(function(){
+  // ---- Stack diagram tap-to-enlarge lightbox (Architecture) ----
+  // The figure in #stack is the trigger (click, tap, Enter, Space).
+  // The overlay clones the live figure at open time — never a second
+  // copy of the diagram markup — strips the "Tap to enlarge" hint and
+  // the trigger semantics from the clone, and closes on the ✕ button,
+  // Escape, or a tap on the backdrop/stage (not on the diagram itself).
+  var figure = document.querySelector('#stack .stack-figure');
+  if (!figure) return;
+
+  var overlay = document.createElement('div');
+  overlay.className = 'stack-lightbox';
+  overlay.hidden = true;
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Stack diagram, enlarged');
+  overlay.innerHTML = '<div class="stack-lightbox-stage"></div>'
+    + '<button type="button" class="stack-lightbox-close" aria-label="Close enlarged diagram">✕</button>';
+  document.body.appendChild(overlay);
+  var stage = overlay.querySelector('.stack-lightbox-stage');
+  var closeBtn = overlay.querySelector('.stack-lightbox-close');
+  var prevOverflow = '';
+
+  function openLightbox(){
+    if (!overlay.hidden) return;
+    stage.innerHTML = '';
+    var clone = figure.cloneNode(true);
+    clone.removeAttribute('role');
+    clone.removeAttribute('tabindex');
+    clone.removeAttribute('aria-label');
+    var hint = clone.querySelector('.stack-hint');
+    if (hint) hint.parentNode.removeChild(hint);
+    stage.appendChild(clone);
+    stage.scrollLeft = 0; stage.scrollTop = 0;
+    prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    overlay.hidden = false;
+    closeBtn.focus();
+  }
+  function closeLightbox(){
+    if (overlay.hidden) return;
+    overlay.hidden = true;
+    stage.innerHTML = '';
+    document.body.style.overflow = prevOverflow;
+    figure.focus();
+  }
+
+  figure.addEventListener('click', openLightbox);
+  figure.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar'){
+      e.preventDefault();
+      openLightbox();
+    }
+  });
+  closeBtn.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', function(e){
+    if (e.target === overlay || e.target === stage) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e){
+    if ((e.key === 'Escape' || e.key === 'Esc') && !overlay.hidden) closeLightbox();
   });
 })();
 </script>
